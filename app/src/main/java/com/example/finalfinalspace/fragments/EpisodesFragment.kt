@@ -2,11 +2,16 @@ package com.example.finalfinalspace.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
@@ -16,18 +21,20 @@ import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModelFactory
 import com.example.finalfinalspace.fragments.adapters.EpisodesRWAdapter
 
-class EpisodesFragment : Fragment() {
+class EpisodesFragment() : Fragment() {
 
     lateinit var ctx: Context
     lateinit var episodesData: List<EpisodesInfo>
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         if (container != null) {
             ctx = container.getContext()
         };
+
         // Get episodes data
         val database = EpisodesRoomDatabase.getDatabase(ctx)
         val episodesDao = database.episodeDao()
@@ -38,7 +45,8 @@ class EpisodesFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.episodes)
         val emptyView: TextView = view.findViewById(R.id.empty_quotes)
         recyclerView.layoutManager = LinearLayoutManager(ctx)
-        recyclerView.adapter = EpisodesRWAdapter(ctx, episodesData)
+        val adapter = EpisodesRWAdapter(ctx, episodesData)
+        recyclerView.adapter = adapter
 
         // set visibility of views
         if (episodesData.isEmpty()) {
@@ -52,5 +60,21 @@ class EpisodesFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        val recyclerView: RecyclerView = view.findViewById(R.id.episodes)
+        val adapter: EpisodesRWAdapter = recyclerView.adapter as EpisodesRWAdapter
+        adapter.setOnClickListener(object: EpisodesRWAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                Log.d("clicking on:", position.toString())
+                val bundle: Bundle = bundleOf("episodeIndex" to position)
+                navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
+            }
+
+        })
+        recyclerView.adapter = adapter
+
+    }
 
 }

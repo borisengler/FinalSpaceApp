@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.Navigation
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -35,7 +37,6 @@ class NavigationFragment : Fragment(), View.OnClickListener {
             ctx = container.getContext()
         };
         return inflater.inflate(R.layout.fragment_navigation, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,8 +53,7 @@ class NavigationFragment : Fragment(), View.OnClickListener {
         when(v!!.id) {
             R.id.syncButton -> syncData()
             R.id.quotesButton -> navController.navigate(R.id.action_navigationFragment_to_quotesFragment)
-            R.id.episodesButton -> navController!!.navigate(R.id.action_navigationFragment_to_episodesFragment)
-//            R.id.quotes_button -> navController!!.navigate(R.id.action_navigationFragment_to_quotesFragment)
+            R.id.episodesButton -> navController.navigate(R.id.action_navigationFragment_to_episodesFragment)
         }
     }
 

@@ -12,6 +12,13 @@ import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
     : RecyclerView.Adapter<EpisodesRWAdapter.EpisodeViewHolder>() {
 
+
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private lateinit var onListener: onItemClickListener
     private val ctx: Context = context
     private val episodes: List<EpisodesInfo> = episodesData
 
@@ -21,7 +28,8 @@ class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
     ): EpisodesRWAdapter.EpisodeViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(ctx)
         val view: View = inflater.inflate(R.layout.episode_cardview, parent, false)
-        return EpisodeViewHolder(view);
+
+        return EpisodeViewHolder(view, onListener);
     }
 
     override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
@@ -34,7 +42,7 @@ class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
         return episodes.size
     }
 
-    inner class EpisodeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EpisodeViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         var episodeNameView: TextView
         var episodeDateView: TextView
         var episodeSrcView: TextView
@@ -43,8 +51,14 @@ class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
             episodeNameView = itemView.findViewById(R.id.episode_name)
             episodeDateView = itemView.findViewById(R.id.episode_date)
             episodeSrcView = itemView.findViewById(R.id.episode_img_src)
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
         }
+    }
 
+    fun setOnClickListener(listener: onItemClickListener) {
+        onListener = listener
     }
 
 }

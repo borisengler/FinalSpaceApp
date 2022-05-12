@@ -18,6 +18,7 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
         getEpisodes()
         getQuotes()
         return Result.Success()
+        // TODO zisti uspech a dat sem Toast.makeText()
     }
 
     private suspend fun getEpisodes() {
