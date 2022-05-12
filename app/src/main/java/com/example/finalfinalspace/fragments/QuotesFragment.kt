@@ -2,7 +2,6 @@ package com.example.finalfinalspace.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,17 +19,17 @@ import com.example.finalfinalspace.fragments.adapters.QuotesRWAdapter
 
 class QuotesFragment  : Fragment() {
 
-    lateinit var ctx: Context
-    lateinit var quotesData: List<QuotesInfo>
+    private lateinit var ctx: Context
+    private lateinit var quotesData: List<QuotesInfo>
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         if (container != null) {
-            ctx = container.getContext()
-        };
+            ctx = container.context
+        }
         // Get quotes data
         val database = QuotesRoomDatabase.getDatabase(ctx)
         val quotesDao = database.quotesDao()
@@ -45,12 +44,12 @@ class QuotesFragment  : Fragment() {
 
         // set visibility of views
         if (quotesData.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.visibility = View.GONE
+            emptyView.visibility = View.VISIBLE
         }
         else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
+            recyclerView.visibility = View.VISIBLE
+            emptyView.visibility = View.GONE
         }
         return view
     }

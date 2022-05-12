@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -21,10 +20,10 @@ import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModelFactory
 import com.example.finalfinalspace.fragments.adapters.EpisodesRWAdapter
 
-class EpisodesFragment() : Fragment() {
+class EpisodesFragment : Fragment() {
 
-    lateinit var ctx: Context
-    lateinit var episodesData: List<EpisodesInfo>
+    private lateinit var ctx: Context
+    private lateinit var episodesData: List<EpisodesInfo>
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -32,8 +31,8 @@ class EpisodesFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         if (container != null) {
-            ctx = container.getContext()
-        };
+            ctx = container.context
+        }
 
         // Get episodes data
         val database = EpisodesRoomDatabase.getDatabase(ctx)
@@ -50,12 +49,12 @@ class EpisodesFragment() : Fragment() {
 
         // set visibility of views
         if (episodesData.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.visibility = View.GONE
+            emptyView.visibility = View.VISIBLE
         }
         else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
+            recyclerView.visibility = View.VISIBLE
+            emptyView.visibility = View.GONE
         }
         return view
     }
@@ -65,7 +64,7 @@ class EpisodesFragment() : Fragment() {
         navController = Navigation.findNavController(view)
         val recyclerView: RecyclerView = view.findViewById(R.id.episodes)
         val adapter: EpisodesRWAdapter = recyclerView.adapter as EpisodesRWAdapter
-        adapter.setOnClickListener(object: EpisodesRWAdapter.onItemClickListener {
+        adapter.setOnClickListener(object: EpisodesRWAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d("clicking on:", position.toString())
                 val bundle: Bundle = bundleOf("episodeIndex" to position)

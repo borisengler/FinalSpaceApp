@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.os.bundleOf
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.Navigation
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -20,13 +18,9 @@ import com.example.finalfinalspace.workers.SyncDataWorker
 class NavigationFragment : Fragment(), View.OnClickListener {
 
 
-    lateinit var navController: NavController
-    lateinit var ctx: Context
+    private lateinit var navController: NavController
+    private lateinit var ctx: Context
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +28,8 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         if (container != null) {
-            ctx = container.getContext()
-        };
+            ctx = container.context
+        }
         return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
@@ -57,7 +51,7 @@ class NavigationFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun syncData() {
+    private fun syncData() {
         val workManager = WorkManager.getInstance(ctx)
         workManager.enqueue(OneTimeWorkRequest.from(SyncDataWorker::class.java))
     }

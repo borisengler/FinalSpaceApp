@@ -9,13 +9,6 @@ class QuotesViewModel(private val quotesDao: QuotesDAO) : ViewModel()  {
     /**
      * Retrieve an item from the repository.
      */
-    fun retrieveQuote(id: Int): QuotesInfo {
-        return quotesDao.getQuote(id)
-    }
-
-    /**
-     * Retrieve an item from the repository.
-     */
     fun retrieveAllQuotes(): List<QuotesInfo> {
         allItems = quotesDao.getAllQuotes()
         return allItems

@@ -21,12 +21,12 @@ class QuotesRWAdapter(context: Context, quotesData: List<QuotesInfo>)
     ): QuotesRWAdapter.QuoteViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(ctx)
         val view: View = inflater.inflate(R.layout.quote_cardview, parent, false)
-        return QuoteViewHolder(view);
+        return QuoteViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: QuotesRWAdapter.QuoteViewHolder, position: Int) {
-        holder.quoteTextView.text = quotes.get(position).quote
-        holder.quoteAuthorView.text = quotes.get(position).by
+        holder.quoteTextView.text = quotes[position].quote
+        holder.quoteAuthorView.text = quotes[position].by
     }
 
     override fun getItemCount(): Int {
@@ -34,14 +34,7 @@ class QuotesRWAdapter(context: Context, quotesData: List<QuotesInfo>)
     }
 
     inner class QuoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var quoteTextView: TextView
-        var quoteAuthorView: TextView
-
-        init {
-            quoteTextView = itemView.findViewById(R.id.quote_text)
-            quoteAuthorView = itemView.findViewById(R.id.quote_author)
-        }
-
+        var quoteTextView: TextView = itemView.findViewById(R.id.quote_text)
+        var quoteAuthorView: TextView = itemView.findViewById(R.id.quote_author)
     }
-
 }

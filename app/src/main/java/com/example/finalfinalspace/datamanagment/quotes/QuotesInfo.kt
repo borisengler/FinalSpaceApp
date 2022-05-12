@@ -3,7 +3,6 @@ package com.example.finalfinalspace.datamanagment.quotes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.squareup.moshi.Json
 
 @Entity(tableName = "quotes_db")
 data class QuotesInfo(
