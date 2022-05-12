@@ -66,8 +66,7 @@ class EpisodesFragment : Fragment() {
         val adapter: EpisodesRWAdapter = recyclerView.adapter as EpisodesRWAdapter
         adapter.setOnClickListener(object: EpisodesRWAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Log.d("clicking on:", position.toString())
-                val bundle: Bundle = bundleOf("episodeIndex" to position)
+                val bundle: Bundle = bundleOf("episodeId" to position+1)
                 navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
             }
 
