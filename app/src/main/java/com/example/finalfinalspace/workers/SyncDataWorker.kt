@@ -24,16 +24,14 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
         val database = EpisodesRoomDatabase.getDatabase(context)
         val episodesDao = database.episodeDao()
         val episodes = FinalSpaceAPIObject.retrofitService.getEpisodes()
-        for (item in episodes) {
-            episodesDao.insert(item)
-        }
+        episodesDao.insertAll(episodes)
     }
 
     private suspend fun getQuotes() {
         val database = QuotesRoomDatabase.getDatabase(context)
         val quotesDao = database.quotesDao()
         val quotes = FinalSpaceAPIObject.retrofitService.getQuotes()
-        val idk = quotesDao.insertAll(quotes)
+        quotesDao.insertAll(quotes)
     }
 
 }

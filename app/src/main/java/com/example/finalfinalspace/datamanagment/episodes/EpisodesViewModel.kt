@@ -4,20 +4,21 @@ import androidx.lifecycle.*
 
 class EpisodesViewModel(private val episodesDao: EpisodesDAO) : ViewModel()  {
 
-    val allItems: LiveData<List<EpisodesInfo>> = episodesDao.getAllEpisodes().asLiveData()
+    lateinit var allItems: List<EpisodesInfo>
 
     /**
      * Retrieve an item from the repository.
      */
-    fun retrieveEpisode(id: Int): LiveData<EpisodesInfo> {
-        return episodesDao.getEpisode(id).asLiveData()
+    fun retrieveEpisode(id: Int): EpisodesInfo {
+        return episodesDao.getEpisode(id)
     }
 
     /**
      * Retrieve an item from the repository.
      */
-    fun retrieveAllEpisodes(): LiveData<List<EpisodesInfo>> {
-        return episodesDao.getAllEpisodes().asLiveData()
+    fun retrieveAllEpisodes(): List<EpisodesInfo> {
+        allItems = episodesDao.getAllEpisodes()
+        return episodesDao.getAllEpisodes()
     }
 
 }

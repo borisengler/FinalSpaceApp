@@ -19,7 +19,5 @@ data class EpisodesInfo(
     val writer: String,
     @ColumnInfo(name = "img_url")
     @Json(name = "img_url") val imageUrl: String,
-//    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-//    val image: Bitmap
 )
 

@@ -17,6 +17,7 @@ abstract class EpisodesRoomDatabase : RoomDatabase() {
                     EpisodesRoomDatabase::class.java,
                     "episodes")
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
                 // return instance
