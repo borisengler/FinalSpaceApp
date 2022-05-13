@@ -12,12 +12,14 @@ data class EpisodesInfo(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "air_date")
-    @Json(name = "air_date") val airDate: String,
+    val airDate: String,
     @ColumnInfo(name = "director")
     val director: String,
     @ColumnInfo(name = "writer")
     val writer: String,
     @ColumnInfo(name = "img_url")
-    @Json(name = "img_url") val imageUrl: String,
+    val imageUrl: String,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB, name = "image")
+    val image: ByteArray
 )
 

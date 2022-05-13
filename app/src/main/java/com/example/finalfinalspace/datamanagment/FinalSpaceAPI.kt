@@ -1,6 +1,8 @@
 package com.example.finalfinalspace.datamanagment
 
+import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
+import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
 import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -27,10 +29,13 @@ interface FinalSpaceAPI {
      * HTTP method
      */
     @GET("episode")
-    suspend fun getEpisodes() : List<EpisodesInfo>
+    suspend fun getEpisodes() : List<EpisodesWithCharsInfo>
 
     @GET("quote")
     suspend fun getQuotes() : List<QuotesInfo>
+
+    @GET("character")
+    suspend fun getCharacters() : List<CharactersInfo>
 }
 
 object FinalSpaceAPIObject {

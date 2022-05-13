@@ -69,15 +69,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/episodeWriter" />
 
-        <TextView
-            android:id="@+id/episodeSrc"
+        <ImageView
+            android:id="@+id/episodeImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeCharacters" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeCharacters"
+            tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

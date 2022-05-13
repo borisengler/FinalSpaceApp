@@ -1,21 +1,21 @@
-package com.example.finalfinalspace.datamanagment.episodes
+package com.example.finalfinalspace.datamanagment.characters
 
 import android.content.Context
 import androidx.room.*
 
-@Database(entities = [EpisodesInfo::class], version = 2, exportSchema = false)
-abstract class EpisodesRoomDatabase : RoomDatabase() {
+@Database(entities = [CharactersInfo::class], version = 1, exportSchema = false)
+abstract class CharactersRoomDatabase : RoomDatabase() {
 
-    abstract fun episodeDao(): EpisodesDAO
+    abstract fun charactersDao(): CharactersDAO
 
     companion object {
-        private var INSTANCE: EpisodesRoomDatabase? = null
-        fun getDatabase(context: Context): EpisodesRoomDatabase {
+        private var INSTANCE: CharactersRoomDatabase? = null
+        fun getDatabase(context: Context): CharactersRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    EpisodesRoomDatabase::class.java,
-                    "episodes")
+                    CharactersRoomDatabase::class.java,
+                    "characters")
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
