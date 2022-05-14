@@ -1,33 +1,22 @@
 package com.example.finalfinalspace.workers
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.app.DownloadManager
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.database.Cursor
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.finalfinalspace.MainActivity
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPIObject
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiRoomDatabase
 import com.example.finalfinalspace.datamanagment.characters.CharactersRoomDatabase
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesDAO
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesRoomDatabase
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
-import com.example.finalfinalspace.datamanagment.images.ImageRetrofitClient
 import com.example.finalfinalspace.datamanagment.quotes.QuotesRoomDatabase
 import retrofit2.Call
 import okhttp3.ResponseBody
@@ -102,8 +91,6 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
     private fun downloadImage(url: String, directory: File, name: String) {
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         val downloadUri = Uri.parse(url)
-//        Log.d(directory.toString(), name)
-
 
         val request = DownloadManager.Request(downloadUri).apply {
             setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -118,7 +105,11 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
 
         val downloadId = downloadManager.enqueue(request)
         val query = DownloadManager.Query().setFilterById(downloadId)
-        Thread(Runnable {
+        Thread {
+            val path = context.getExternalFilesDir(null).toString() + "/images/$name"
+            if (File(path).exists()) {
+                File(path).delete()
+            }
             var downloading = true
             while (downloading) {
                 val cursor: Cursor = downloadManager.query(query)
@@ -129,7 +120,7 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
                 val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
                 cursor.close()
             }
-        }).start()
+        }.start()
     }
 
 }
