@@ -1,5 +1,6 @@
 package com.example.finalfinalspace.fragments
 
+import android.R.attr.path
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -70,10 +71,9 @@ class EpisodeFragment  : Fragment() {
         }
         view.findViewById<TextView>(R.id.episodeCharacters).text = characterString
 
-        // image
-        Log.d("Imagesize", episodeData.image.size.toString())
-        val recordImage: ByteArray = episodeData.image
-        val bitmap = BitmapFactory.decodeByteArray(recordImage, 0, recordImage.size)
+        val epIdStr = episodeId.toString()
+        var path = ctx.getExternalFilesDir(null).toString() + "/images/image$epIdStr.jpg"
+        val bitmap = BitmapFactory.decodeFile(path)
         view.findViewById<ImageView>(R.id.episodeImage).setImageBitmap(bitmap)
 
         return view
