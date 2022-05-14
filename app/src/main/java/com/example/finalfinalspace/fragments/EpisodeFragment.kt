@@ -1,10 +1,8 @@
 package com.example.finalfinalspace.fragments
 
-import android.R.attr.path
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +45,12 @@ class EpisodeFragment  : Fragment() {
         val episodesDao = database.episodeDao()
         episodeData = EpisodesViewModelFactory(episodesDao).create(EpisodesViewModel::class.java).retrieveEpisode(episodeId)
         view.findViewById<TextView>(R.id.episodeName).text = episodeData.name
-        view.findViewById<TextView>(R.id.episodeDate).text = episodeData.airDate
-        view.findViewById<TextView>(R.id.episodeDirector).text = episodeData.director
-        view.findViewById<TextView>(R.id.episodeWriter).text = episodeData.writer
+        view.findViewById<TextView>(R.id.episodeDate).text =
+            String.format(resources.getString(R.string.episodeAirDate), episodeData.airDate)
+        view.findViewById<TextView>(R.id.episodeDirector).text =
+            String.format(resources.getString(R.string.episodeDirector), episodeData.director)
+        view.findViewById<TextView>(R.id.episodeWriter).text =
+            String.format(resources.getString(R.string.episodeWriter), episodeData.writer)
 
         // characters
         var characterString: String = ""

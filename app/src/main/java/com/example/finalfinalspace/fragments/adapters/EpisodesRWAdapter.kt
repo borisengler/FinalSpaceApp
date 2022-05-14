@@ -1,9 +1,11 @@
 package com.example.finalfinalspace.fragments.adapters
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
@@ -35,7 +37,10 @@ class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
     override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
         holder.episodeNameView.text = episodes[position].name
         holder.episodeDateView.text = episodes[position].airDate
-        holder.episodeSrcView.text = episodes[position].imageUrl
+        val epIdStr = (position+1).toString()
+        var path = ctx.getExternalFilesDir(null).toString() + "/images/image$epIdStr.jpg"
+        val bitmap = BitmapFactory.decodeFile(path)
+        holder.episodeImage.setImageBitmap(bitmap)
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +50,7 @@ class EpisodesRWAdapter(context: Context, episodesData: List<EpisodesInfo>)
     inner class EpisodeViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         var episodeNameView: TextView = itemView.findViewById(R.id.episode_name)
         var episodeDateView: TextView = itemView.findViewById(R.id.episode_date)
-        var episodeSrcView: TextView = itemView.findViewById(R.id.episode_img_src)
+        var episodeImage: ImageView = itemView.findViewById(R.id.episode_img)
 
         init {
             itemView.setOnClickListener{
