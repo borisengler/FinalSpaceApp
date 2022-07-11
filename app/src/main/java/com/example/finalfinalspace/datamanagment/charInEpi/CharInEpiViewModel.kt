@@ -1,9 +1,11 @@
 package com.example.finalfinalspace.datamanagment.charInEpi
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class CharInEpiViewModel(private val charInEpisDao: CharInEpiDAO) : ViewModel()  {
+@HiltViewModel
+class CharInEpiViewModel @Inject constructor(private val charInEpisDao: CharInEpiDAO) : ViewModel() {
 
     lateinit var allItems: List<CharInEpiInfo>
 
@@ -17,16 +19,15 @@ class CharInEpiViewModel(private val charInEpisDao: CharInEpiDAO) : ViewModel() 
 
 }
 
-
-/**
- * Factory class to instantiate the [ViewModel] instance.
- */
-class CharInEpiViewModelFactory(private val charInEpiDao: CharInEpiDAO) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CharInEpiViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CharInEpiViewModel(charInEpiDao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+///**
+// * Factory class to instantiate the [ViewModel] instance.
+// */
+//class CharInEpiViewModelFactory(private val charInEpiDao: CharInEpiDAO) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(CharInEpiViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return CharInEpiViewModel(charInEpiDao) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}

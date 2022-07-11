@@ -12,7 +12,7 @@ interface QuotesDAO {
     suspend fun insert(item: QuotesInfo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(articleList : List<QuotesInfo>) : List<Long>
+    fun insertAll(articleList: List<QuotesInfo>): List<Long>
 
     @Query("SELECT * from quotes_db WHERE id = :id")
     fun getQuote(id: Int): QuotesInfo

@@ -9,10 +9,10 @@ import androidx.room.Query
 interface EpisodesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(episodes : EpisodesInfo) : Long
+    fun insert(episodes: EpisodesInfo): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(episodes : List<EpisodesInfo>) : List<Long>
+    fun insertAll(episodes: List<EpisodesInfo>): List<Long>
 
     @Query("SELECT * from episodes WHERE id = :id")
     fun getEpisode(id: Int): EpisodesInfo

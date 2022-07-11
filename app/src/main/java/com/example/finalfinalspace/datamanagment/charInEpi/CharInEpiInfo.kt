@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "char_in_episode")
 class CharInEpiInfo(
     @PrimaryKey(autoGenerate = false)

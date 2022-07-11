@@ -29,13 +29,13 @@ interface FinalSpaceAPI {
      * HTTP method
      */
     @GET("episode")
-    suspend fun getEpisodes() : List<EpisodesWithCharsInfo>
+    suspend fun getEpisodes(): List<EpisodesWithCharsInfo>
 
     @GET("quote")
-    suspend fun getQuotes() : List<QuotesInfo>
+    suspend fun getQuotes(): List<QuotesInfo>
 
     @GET("character")
-    suspend fun getCharacters() : List<CharactersInfo>
+    suspend fun getCharacters(): List<CharactersInfo>
 }
 
 object FinalSpaceAPIObject {

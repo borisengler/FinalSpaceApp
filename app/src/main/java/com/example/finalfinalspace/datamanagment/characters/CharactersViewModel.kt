@@ -1,8 +1,11 @@
 package com.example.finalfinalspace.datamanagment.characters
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CharactersViewModel(private val charactersDao: CharactersDAO) : ViewModel()  {
+@HiltViewModel
+class CharactersViewModel @Inject constructor(private val charactersDao: CharactersDAO) : ViewModel() {
 
     lateinit var allItems: List<CharactersInfo>
 
@@ -23,16 +26,15 @@ class CharactersViewModel(private val charactersDao: CharactersDAO) : ViewModel(
 
 }
 
-
-/**
- * Factory class to instantiate the [ViewModel] instance.
- */
-class CharactersViewModelFactory(private val charactersDao: CharactersDAO) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CharactersViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CharactersViewModel(charactersDao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+///**
+// * Factory class to instantiate the [ViewModel] instance.
+// */
+//class CharactersViewModelFactory(private val charactersDao: CharactersDAO) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(CharactersViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return CharactersViewModel(charactersDao) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}
