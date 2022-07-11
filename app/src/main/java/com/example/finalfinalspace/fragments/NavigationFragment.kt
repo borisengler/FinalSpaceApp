@@ -12,15 +12,23 @@ import androidx.navigation.Navigation
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.finalfinalspace.R
+import com.example.finalfinalspace.datamanagment.FinalSpaceAPIObject
+import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
 import com.example.finalfinalspace.workers.SyncDataWorker
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class NavigationFragment : Fragment(), View.OnClickListener {
 
 
     private lateinit var navController: NavController
     private lateinit var ctx: Context
-
+    @Inject lateinit var quotesDao: QuotesDAO
+    private val scope = MainScope()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +62,10 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     private fun syncData() {
         val workManager = WorkManager.getInstance(ctx)
         workManager.enqueue(OneTimeWorkRequest.from(SyncDataWorker::class.java))
+        scope.launch {
+            val quotes = FinalSpaceAPIObject.retrofitService.getQuotes()
+            quotesDao.insertAll(quotes)
+        }
     }
 
 }

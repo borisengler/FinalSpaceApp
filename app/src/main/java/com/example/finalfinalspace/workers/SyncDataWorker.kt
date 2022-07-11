@@ -17,6 +17,7 @@ import com.example.finalfinalspace.datamanagment.characters.CharactersRoomDataba
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesRoomDatabase
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
+import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
 import com.example.finalfinalspace.datamanagment.quotes.QuotesRoomDatabase
 import retrofit2.Call
 import okhttp3.ResponseBody
@@ -29,19 +30,23 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Paths
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.io.path.exists
 import kotlin.system.exitProcess
 
+@Singleton
 class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
 
     val context: Context = ctx
+    @Inject lateinit var quotesDao: QuotesDAO
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi")
     override suspend fun doWork(): Result {
         getCharacters()
         getEpisodes()
-        getQuotes()
+//        getQuotes()
         return Result.Success()
         // TODO zisti uspech a dat sem Toast.makeText()
     }
@@ -80,12 +85,10 @@ class SyncDataWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(c
         }
     }
 
-    private suspend fun getQuotes() {
-        val database = QuotesRoomDatabase.getDatabase(context)
-        val quotesDao = database.quotesDao()
-        val quotes = FinalSpaceAPIObject.retrofitService.getQuotes()
-        quotesDao.insertAll(quotes)
-    }
+//    private suspend fun getQuotes() {
+//        val quotes = FinalSpaceAPIObject.retrofitService.getQuotes()
+//        quotesDao.insertAll(quotes)
+//    }
 
     @SuppressLint("Range")
     private fun downloadImage(url: String, directory: File, name: String) {

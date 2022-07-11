@@ -2,57 +2,57 @@ package com.example.finalfinalspace.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.DisplayCutout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
+import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
 import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
 import com.example.finalfinalspace.datamanagment.quotes.QuotesRoomDatabase
 import com.example.finalfinalspace.datamanagment.quotes.QuotesViewModel
-import com.example.finalfinalspace.datamanagment.quotes.QuotesViewModelFactory
 import com.example.finalfinalspace.fragments.adapters.QuotesRWAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class QuotesFragment : Fragment() {
 
-class QuotesFragment  : Fragment() {
-
-    private lateinit var ctx: Context
     private lateinit var quotesData: List<QuotesInfo>
 
+    private val quotesVM: QuotesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        if (container != null) {
-            ctx = container.context
-        }
         // Get quotes data
-        val database = QuotesRoomDatabase.getDatabase(ctx)
-        val quotesDao = database.quotesDao()
-        quotesData = QuotesViewModelFactory(quotesDao).create(QuotesViewModel::class.java).retrieveAllQuotes()
+        quotesData = quotesVM.retrieveAllQuotes()
 
         // set the recyclerview
         val view: View = inflater.inflate(R.layout.fragment_quotes, container, false)
         val recyclerView: RecyclerView = view.findViewById(R.id.quotes)
         val emptyView: TextView = view.findViewById(R.id.empty_quotes)
-        recyclerView.layoutManager = LinearLayoutManager(ctx)
-        recyclerView.adapter = QuotesRWAdapter(ctx, quotesData)
+        recyclerView.layoutManager = LinearLayoutManager(container!!.context)
+        recyclerView.adapter = QuotesRWAdapter(container.context, quotesData)
 
         // set visibility of views
         if (quotesData.isEmpty()) {
             recyclerView.visibility = View.GONE
             emptyView.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             recyclerView.visibility = View.VISIBLE
             emptyView.visibility = View.GONE
         }
         return view
     }
-
 
 }
