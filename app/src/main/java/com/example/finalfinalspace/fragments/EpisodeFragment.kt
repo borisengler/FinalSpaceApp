@@ -9,25 +9,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiRoomDatabase
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiViewModel
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiViewModelFactory
-import com.example.finalfinalspace.datamanagment.characters.CharactersRoomDatabase
+import com.example.finalfinalspace.datamanagment.characters.CharactersDAO
 import com.example.finalfinalspace.datamanagment.characters.CharactersViewModel
-import com.example.finalfinalspace.datamanagment.characters.CharactersViewModelFactory
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesRoomDatabase
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class EpisodeFragment  : Fragment() {
+@AndroidEntryPoint
+class EpisodeFragment : Fragment() {
 
     private lateinit var ctx: Context
     private lateinit var episodeData: EpisodesInfo
-
+    @Inject lateinit var charactersDao: CharactersDAO
+    private val characterVM: CharactersViewModel by viewModels()
+    private val episodesVM: EpisodesViewModel by viewModels()
+    private val charInEpiVM: CharInEpiViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +42,7 @@ class EpisodeFragment  : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_episode, container, false)
 
         // simple data
-        val database = EpisodesRoomDatabase.getDatabase(ctx)
-        val episodesDao = database.episodeDao()
-        episodeData = EpisodesViewModelFactory(episodesDao).create(EpisodesViewModel::class.java).retrieveEpisode(episodeId)
+        episodeData = episodesVM.retrieveEpisode(episodeId)
         view.findViewById<TextView>(R.id.episodeName).text = episodeData.name
         view.findViewById<TextView>(R.id.episodeDate).text =
             String.format(resources.getString(R.string.episodeAirDate), episodeData.airDate)
@@ -54,16 +53,10 @@ class EpisodeFragment  : Fragment() {
 
         // characters
         var characterString: String = ""
-        val charactersInEpiDatabase = CharInEpiRoomDatabase.getDatabase(ctx)
-        val charInEpiDao = charactersInEpiDatabase.charInEpiDao()
-        val charactersDatabase = CharactersRoomDatabase.getDatabase(ctx)
-        val charactersDao = charactersDatabase.charactersDao()
 
-        val characters = CharInEpiViewModelFactory(charInEpiDao).create(CharInEpiViewModel::class.java)
-            .getCharactersInEpisode(episodeId)
+        val characters = charInEpiVM.getCharactersInEpisode(episodeId)
         for (character: CharInEpiInfo in characters) {
-            val charName = CharactersViewModelFactory(charactersDao).create(CharactersViewModel::class.java)
-                .retrieveCharacter(character.character_id).name
+            val charName = characterVM.retrieveCharacter(character.character_id).name
             if (characterString.length == 0) {
                 characterString = charName
             } else {
@@ -79,6 +72,5 @@ class EpisodeFragment  : Fragment() {
 
         return view
     }
-
 
 }

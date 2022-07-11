@@ -3,7 +3,6 @@ package com.example.finalfinalspace.datamanagment.episodes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.squareup.moshi.Json
 
 @Entity(tableName = "episodes")
 data class EpisodesInfo(

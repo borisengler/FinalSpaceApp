@@ -1,8 +1,11 @@
 package com.example.finalfinalspace.datamanagment.episodes
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EpisodesViewModel(private val episodesDao: EpisodesDAO) : ViewModel()  {
+@HiltViewModel
+class EpisodesViewModel @Inject constructor(private val episodesDao: EpisodesDAO) : ViewModel() {
 
     lateinit var allItems: List<EpisodesInfo>
 
@@ -23,16 +26,15 @@ class EpisodesViewModel(private val episodesDao: EpisodesDAO) : ViewModel()  {
 
 }
 
-
-/**
- * Factory class to instantiate the [ViewModel] instance.
- */
-class EpisodesViewModelFactory(private val episodesDao: EpisodesDAO) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(EpisodesViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return EpisodesViewModel(episodesDao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
+///**
+// * Factory class to instantiate the [ViewModel] instance.
+// */
+//class EpisodesViewModelFactory(private val episodesDao: EpisodesDAO) : ViewModelProvider.Factory {
+//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//        if (modelClass.isAssignableFrom(EpisodesViewModel::class.java)) {
+//            @Suppress("UNCHECKED_CAST")
+//            return EpisodesViewModel(episodesDao) as T
+//        }
+//        throw IllegalArgumentException("Unknown ViewModel class")
+//    }
+//}

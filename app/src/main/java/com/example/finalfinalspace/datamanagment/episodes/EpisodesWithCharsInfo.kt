@@ -1,7 +1,5 @@
 package com.example.finalfinalspace.datamanagment.episodes
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 data class EpisodesWithCharsInfo(
