@@ -3,6 +3,7 @@ package com.example.finalfinalspace.datamanagment.charInEpi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.datamanagment.network.CharInEpiManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiViewModel
 import com.example.finalfinalspace.datamanagment.characters.CharactersViewModel
@@ -15,6 +18,7 @@ import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -38,10 +42,18 @@ class EpisodeFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_episode, container, false)
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                charInEpiVM.charsInEpi.collectLatest {
+//                    adapter.submitList(it)
+                }
+            }
+        }
+
         // simple data
         scope.launch {
             episodeData = episodesVM.retrieveEpisode(episodeId)
-            view.findViewById<TextView>(R.id.episodeName).text = episodeData.name
+            view.findViewById<TextView>(R.id.episodeName)?.text = episodeData.name
             view.findViewById<TextView>(R.id.episodeDate).text =
                 String.format(resources.getString(R.string.episodeAirDate), episodeData.airDate)
             view.findViewById<TextView>(R.id.episodeDirector).text =

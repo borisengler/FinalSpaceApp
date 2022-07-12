@@ -4,6 +4,7 @@ import androidx.lifecycle.distinctUntilChanged
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
 import com.example.finalfinalspace.datamanagment.characters.CharactersDAO
 import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 class CharactersManager @Inject constructor(

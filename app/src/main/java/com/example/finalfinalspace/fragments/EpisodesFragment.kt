@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +20,8 @@ import com.example.finalfinalspace.R
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
 import com.example.finalfinalspace.fragments.adapters.EpisodesRWAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,8 +41,12 @@ class EpisodesFragment : Fragment() {
         }
 
         // Get episodes data
-        episodesVM.episodes.observe(viewLifecycleOwner) {
-            episodesRWAdapter.submitList(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                episodesVM.episodes.collectLatest {
+                    episodesRWAdapter.submitList(it)
+                }
+            }
         }
 
         // set the recyclerview
