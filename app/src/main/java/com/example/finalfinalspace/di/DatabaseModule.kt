@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object QuotesDBModule {
+object DatabaseModule {
     @Provides
     fun provideQuotesDao(database: FinalSpaceDatabase): QuotesDAO {
         return database.quotesDao()
@@ -44,7 +44,7 @@ object QuotesDBModule {
             appContext,
             FinalSpaceDatabase::class.java,
             "final_space_db"
-        ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
+        ).fallbackToDestructiveMigration().build()
     }
 
 }

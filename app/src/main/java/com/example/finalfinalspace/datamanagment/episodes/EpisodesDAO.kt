@@ -1,5 +1,6 @@
 package com.example.finalfinalspace.datamanagment.episodes
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,8 +16,8 @@ interface EpisodesDAO {
     fun insertAll(episodes: List<EpisodesInfo>): List<Long>
 
     @Query("SELECT * from episodes WHERE id = :id")
-    fun getEpisode(id: Int): EpisodesInfo
+    suspend fun fetchEpisode(id: Int): EpisodesInfo
 
     @Query("SELECT * from episodes ORDER BY id ASC")
-    fun getAllEpisodes(): List<EpisodesInfo>
+    fun getAllEpisodes(): LiveData<List<EpisodesInfo>>
 }
