@@ -1,40 +1,20 @@
 package com.example.finalfinalspace.datamanagment.episodes
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.finalfinalspace.datamanagment.network.EpisodesManager
+import com.example.finalfinalspace.datamanagment.network.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EpisodesViewModel @Inject constructor(private val episodesDao: EpisodesDAO) : ViewModel() {
+class EpisodesViewModel @Inject constructor(private val episodesManager: EpisodesManager
+) : ViewModel() {
 
-    lateinit var allItems: List<EpisodesInfo>
+    val episodes = episodesManager.episodes
 
-    /**
-     * Retrieve an item from the repository.
-     */
-    fun retrieveEpisode(id: Int): EpisodesInfo {
-        return episodesDao.getEpisode(id)
-    }
-
-    /**
-     * Retrieve an item from the repository.
-     */
-    fun retrieveAllEpisodes(): List<EpisodesInfo> {
-        allItems = episodesDao.getAllEpisodes()
-        return episodesDao.getAllEpisodes()
+    suspend fun retrieveEpisode(id: Int): EpisodesInfo {
+        return episodesManager.fetchEpisode(id)
     }
 
 }
-
-///**
-// * Factory class to instantiate the [ViewModel] instance.
-// */
-//class EpisodesViewModelFactory(private val episodesDao: EpisodesDAO) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(EpisodesViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return EpisodesViewModel(episodesDao) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}

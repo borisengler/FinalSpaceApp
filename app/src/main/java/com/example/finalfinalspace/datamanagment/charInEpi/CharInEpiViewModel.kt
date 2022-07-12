@@ -1,33 +1,20 @@
 package com.example.finalfinalspace.datamanagment.charInEpi
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import com.example.finalfinalspace.datamanagment.network.CharInEpiManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CharInEpiViewModel @Inject constructor(private val charInEpisDao: CharInEpiDAO) : ViewModel() {
+class CharInEpiViewModel @Inject constructor(private val charInEpiManager: CharInEpiManager) : ViewModel() {
 
-    lateinit var allItems: List<CharInEpiInfo>
+    val charsInEpi = charInEpiManager.charsInEpi
 
-    /**
-     * Retrieve an item from the repository.
-     */
-    fun getCharactersInEpisode(episode_id: Int): List<CharInEpiInfo> {
-        allItems = charInEpisDao.getCharactersInEpisode(episode_id)
-        return allItems
+    suspend fun getCharactersInEpisode(episodeId: Int): List<CharInEpiInfo> {
+        return charInEpiManager.fetchCharactersInEpisode(episodeId)
     }
 
 }
 
-///**
-// * Factory class to instantiate the [ViewModel] instance.
-// */
-//class CharInEpiViewModelFactory(private val charInEpiDao: CharInEpiDAO) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(CharInEpiViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return CharInEpiViewModel(charInEpiDao) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}

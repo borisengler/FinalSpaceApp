@@ -1,40 +1,21 @@
 package com.example.finalfinalspace.datamanagment.characters
 
 import androidx.lifecycle.ViewModel
+import com.example.finalfinalspace.datamanagment.network.CharactersManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CharactersViewModel @Inject constructor(private val charactersDao: CharactersDAO) : ViewModel() {
-
-    lateinit var allItems: List<CharactersInfo>
+class CharactersViewModel @Inject constructor(private val charactersManager: CharactersManager) : ViewModel() {
 
     /**
      * Retrieve an item from the repository.
      */
-    fun retrieveCharacter(id: Int): CharactersInfo {
-        return charactersDao.getCharacter(id)
+    suspend fun retrieveCharacters(ids: List<Int>): List<CharactersInfo> {
+        return charactersManager.fetchCharacters(ids)
     }
 
-    /**
-     * Retrieve an item from the repository.
-     */
-    fun retrieveAllCharacters(): List<CharactersInfo> {
-        allItems = charactersDao.getAllCharacters()
-        return charactersDao.getAllCharacters()
-    }
+    val characters = charactersManager.characters
 
 }
 
-///**
-// * Factory class to instantiate the [ViewModel] instance.
-// */
-//class CharactersViewModelFactory(private val charactersDao: CharactersDAO) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(CharactersViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return CharactersViewModel(charactersDao) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}
