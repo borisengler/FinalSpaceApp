@@ -1,9 +1,6 @@
-package com.example.finalfinalspace.datamanagment.network
+package com.example.finalfinalspace.datamanagment.charInEpi
 
-import androidx.lifecycle.distinctUntilChanged
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject

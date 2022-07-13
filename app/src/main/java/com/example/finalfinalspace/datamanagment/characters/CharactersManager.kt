@@ -1,9 +1,7 @@
-package com.example.finalfinalspace.datamanagment.network
+package com.example.finalfinalspace.datamanagment.characters
 
-import androidx.lifecycle.distinctUntilChanged
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
-import com.example.finalfinalspace.datamanagment.characters.CharactersDAO
-import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
@@ -12,8 +10,8 @@ class CharactersManager @Inject constructor(
     private val finalSpaceAPI: FinalSpaceAPI
 ) {
 
-    suspend fun fetchCharacters(ids: List<Int>): List<CharactersInfo>{
-        return charactersDAO.fetchCharacters(ids)
+    fun fetchCharacters(ids: List<Int>): Flow<List<CharactersInfo>> {
+        return charactersDAO.getCharacters(ids)
     }
 
     val characters = charactersDAO.getAllCharacters().distinctUntilChanged()

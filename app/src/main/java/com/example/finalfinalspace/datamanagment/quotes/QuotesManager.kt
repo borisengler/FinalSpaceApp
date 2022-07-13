@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.datamanagment.network
+package com.example.finalfinalspace.datamanagment.quotes
 
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
 import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO

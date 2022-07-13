@@ -18,6 +18,9 @@ interface EpisodesDAO {
     @Query("SELECT * from episodes WHERE id = :id")
     suspend fun fetchEpisode(id: Int): EpisodesInfo
 
+    @Query("SELECT * from episodes WHERE id = :id")
+    fun getEpisode(id: Int): Flow<EpisodesInfo>
+
     @Query("SELECT * from episodes ORDER BY id ASC")
     fun getAllEpisodes(): Flow<List<EpisodesInfo>>
 }

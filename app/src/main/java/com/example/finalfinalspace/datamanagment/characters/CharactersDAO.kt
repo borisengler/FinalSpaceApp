@@ -13,7 +13,7 @@ interface CharactersDAO {
     suspend fun insertAll(characters: List<CharactersInfo>): List<Long>
 
     @Query("SELECT * from characters WHERE id in (:id)")
-    suspend fun fetchCharacters(id: List<Int>): List<CharactersInfo>
+    fun getCharacters(id: List<Int>): Flow<List<CharactersInfo>>
 
     @Query("SELECT * from characters ORDER BY id ASC")
     fun getAllCharacters(): Flow<List<CharactersInfo>>

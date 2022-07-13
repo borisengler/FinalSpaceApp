@@ -1,22 +1,32 @@
-package com.example.finalfinalspace.datamanagment.network
+package com.example.finalfinalspace.datamanagment.episodes
 
-import androidx.lifecycle.distinctUntilChanged
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesDAO
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
+import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 class EpisodesManager @Inject constructor(
     private val episodesDAO: EpisodesDAO,
+    private val charInEpiDAO: CharInEpiDAO,
     private val finalSpaceAPI: FinalSpaceAPI
 ) {
 
     val episodes = episodesDAO.getAllEpisodes().distinctUntilChanged()
 
-    suspend fun fetchEpisode(id: Int): EpisodesInfo {
-        return episodesDAO.fetchEpisode(id)
+    fun getEpisodeWithCharacters(id: Int): Flow<EpisodeWithCharactersInfo> {
+        return episodesDAO.getEpisode(id).combine(charInEpiDAO.getCharacterIdsInEpisodes(id)) { episode, characters ->
+            EpisodeWithCharactersInfo(
+                episode.id,
+                episode.name,
+                episode.airDate,
+                episode.director,
+                episode.writer,
+                episode.imageUrl,
+                characters
+            )
+        }
     }
 
     suspend fun downloadEpisodes() {
