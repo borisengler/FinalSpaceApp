@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.finalfinalspace.R
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
-import com.example.finalfinalspace.datamanagment.characters.CharactersDAO
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesDAO
+import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiManager
+import com.example.finalfinalspace.datamanagment.characters.CharactersManager
+import com.example.finalfinalspace.datamanagment.episodes.EpisodesManager
 import com.example.finalfinalspace.datamanagment.network.FinalSpaceDownloadManager
-import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
+import com.example.finalfinalspace.datamanagment.quotes.QuotesManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -27,10 +27,10 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     private lateinit var ctx: Context
 
     //    TODO vsetky dao potrebujem len kvoli download buttonu, prerobit (asi na service)
-    @Inject lateinit var quotesDao: QuotesDAO
-    @Inject lateinit var charactersDao: CharactersDAO
-    @Inject lateinit var episodesDao: EpisodesDAO
-    @Inject lateinit var charInEpisodeDao: CharInEpiDAO
+    @Inject lateinit var quotesManager: QuotesManager
+    @Inject lateinit var charactersManager: CharactersManager
+    @Inject lateinit var episodesManager: EpisodesManager
+    @Inject lateinit var charInEpiManager: CharInEpiManager
     private val scope = MainScope()
 
     override fun onCreateView(
@@ -63,7 +63,7 @@ class NavigationFragment : Fragment(), View.OnClickListener {
 
     private fun syncData() {
         scope.launch {
-//            FinalSpaceDownloadManager.downloadAllData()
+            FinalSpaceDownloadManager(quotesManager, charactersManager, charInEpiManager, episodesManager).downloadAllData()
         }
     }
 

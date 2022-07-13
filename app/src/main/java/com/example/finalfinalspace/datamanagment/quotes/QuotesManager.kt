@@ -1,8 +1,8 @@
-package com.example.finalfinalspace.datamanagment.network
+package com.example.finalfinalspace.datamanagment.quotes
 
-import androidx.lifecycle.distinctUntilChanged
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
 import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 class QuotesManager @Inject constructor(
