@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
+import com.example.finalfinalspace.databinding.EpisodeCardviewBinding
+import com.example.finalfinalspace.databinding.QuoteCardviewBinding
 import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
 import javax.inject.Inject
 
@@ -18,22 +20,19 @@ class QuotesRWAdapter @Inject constructor() :
         parent: ViewGroup,
         viewType: Int
     ): QuotesRWAdapter.QuoteViewHolder {
-        val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.quote_cardview, parent, false)
-        return QuoteViewHolder(view)
+        return QuoteViewHolder(QuoteCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
     }
 
     override fun onBindViewHolder(holder: QuotesRWAdapter.QuoteViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        holder.bind(getItem(position))
     }
 
-    inner class QuoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var quoteTextView: TextView = itemView.findViewById(R.id.quote_text)
-        private var quoteAuthorView: TextView = itemView.findViewById(R.id.quote_author)
+    inner class QuoteViewHolder(private val binding: QuoteCardviewBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(info: QuotesInfo) {
-            quoteTextView.text = info.quote
-            quoteAuthorView.text = info.by
+            binding.quoteAuthor.text = info.by
+            binding.quoteText.text = info.quote
         }
     }
 

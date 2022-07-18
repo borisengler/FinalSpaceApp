@@ -1,11 +1,9 @@
 package com.example.finalfinalspace.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -29,18 +27,27 @@ class EpisodeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val episodeId: Int = arguments?.get("episodeId") as Int
+        binding = FragmentEpisodeBinding.inflate(inflater, container, false)
 
-//        val view: View = inflater.inflate(R.layout.fragment_episode, container, false)
+        val episodeId = arguments?.get("episodeId") as? Int
 
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_episode, container, false
-        )
+        if (episodeId != null) {
+            episodesVM.loadEpisodeWithCharacters(episodeId)
+        }
 
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.viewModel = episodesVM
-        episodesVM.loadEpisodeWithCharacters(episodeId)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                episodesVM.episodeWithCharacters.collectLatest {
+                    with(binding) {
+                        episodeName.text = it?.name
+                        episodeDate.text = getString(R.string.episodeAirDate, it?.airDate)
+                        episodeDirector.text = getString(R.string.episodeDirector, it?.director)
+                        episodeWriter.text = getString(R.string.episodeWriter, it?.writer)
+                        episodeCharacters.text = it?.characters?.joinToString { it.name }
+                    }
+                }
+            }
+        }
 
         return binding.root
     }
