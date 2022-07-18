@@ -29,6 +29,20 @@ class EpisodesManager @Inject constructor(
         }
     }
 
+    suspend fun fetchEpisodeWithCharacters(id: Int): EpisodeWithCharactersInfo {
+        val episode = episodesDAO.fetchEpisode(id)
+        val characters = charInEpiDAO.fetchCharactersInEpisode(id)
+        return EpisodeWithCharactersInfo(
+            episode.id,
+            episode.name,
+            episode.airDate,
+            episode.director,
+            episode.writer,
+            episode.imageUrl,
+            characters)
+
+    }
+
     suspend fun downloadEpisodes() {
         val episodesWithChars = finalSpaceAPI.getEpisodes()
         for (episode: EpisodesWithCharsInfo in episodesWithChars) {

@@ -1,6 +1,7 @@
 package com.example.finalfinalspace.datamanagment.charInEpi
 
 import androidx.lifecycle.ViewModel
+import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -9,7 +10,7 @@ class CharInEpiViewModel @Inject constructor(private val charInEpiManager: CharI
 
     val charsInEpi = charInEpiManager.charsInEpi
 
-    suspend fun getCharactersInEpisode(episodeId: Int): List<CharInEpiInfo> {
+    suspend fun getCharactersInEpisode(episodeId: Int): List<CharactersInfo> {
         return charInEpiManager.fetchCharactersInEpisode(episodeId)
     }
 

@@ -1,6 +1,7 @@
 package com.example.finalfinalspace.datamanagment.charInEpi
 
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
+import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class CharInEpiManager @Inject constructor(
 
     val charsInEpi = charInEpiDAO.getCharactersInEpisodes().distinctUntilChanged()
 
-    suspend fun fetchCharactersInEpisode(episodeId: Int): List<CharInEpiInfo> {
+    suspend fun fetchCharactersInEpisode(episodeId: Int): List<CharactersInfo> {
         return charInEpiDAO.fetchCharactersInEpisode(episodeId)
     }
 
