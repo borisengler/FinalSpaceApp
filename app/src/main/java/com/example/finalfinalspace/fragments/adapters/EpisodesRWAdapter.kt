@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.EpisodeCardviewBinding
 import com.example.finalfinalspace.databinding.FragmentEpisodeBinding
@@ -44,6 +45,7 @@ class EpisodesRWAdapter @Inject constructor() :
         fun bind(info: EpisodesInfo) {
             binding.episodeName.text = info.name
             binding.episodeDate.text = info.airDate
+            Glide.with(binding.root).load(info.imageUrl).into(binding.episodeImg)
         }
     }
 
