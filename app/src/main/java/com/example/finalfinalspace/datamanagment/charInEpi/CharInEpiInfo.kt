@@ -2,14 +2,31 @@ package com.example.finalfinalspace.datamanagment.charInEpi
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
+import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
+import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 
-@Entity(tableName = "char_in_episode")
-class CharInEpiInfo(
-    @PrimaryKey(autoGenerate = false)
-    val id: Int,
-    @ColumnInfo(name = "episode_id")
-    val episode_id: Int,
-    @ColumnInfo(name = "character_id")
-    val character_id: Int
+@Entity(
+    primaryKeys = ["episodeId", "characterId"], tableName = "char_in_episode",
+    foreignKeys = [
+        ForeignKey(
+            entity = EpisodesInfo::class,
+            parentColumns = ["episodeId"],
+            childColumns = ["episodeId"],
+            onDelete = CASCADE
+        ),
+        ForeignKey(
+            entity = CharactersInfo::class,
+            parentColumns = ["characterId"],
+            childColumns = ["characterId"],
+            onDelete = CASCADE
+        )
+    ]
+)
+data class CharInEpiInfo(
+    @ColumnInfo(index = true)
+    val episodeId: Int,
+    @ColumnInfo(index = true)
+    val characterId: Int
 )

@@ -39,10 +39,10 @@ class EpisodeFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 episodesVM.episodeWithCharacters.collectLatest {
                     with(binding) {
-                        episodeName.text = it?.name
-                        episodeDate.text = getString(R.string.episodeAirDate, it?.airDate)
-                        episodeDirector.text = getString(R.string.episodeDirector, it?.director)
-                        episodeWriter.text = getString(R.string.episodeWriter, it?.writer)
+                        episodeName.text = it?.episode?.name
+                        episodeDate.text = getString(R.string.episodeAirDate, it?.episode?.airDate)
+                        episodeDirector.text = getString(R.string.episodeDirector, it?.episode?.director)
+                        episodeWriter.text = getString(R.string.episodeWriter, it?.episode?.writer)
                         episodeCharacters.text = it?.characters?.joinToString { it.name }
                     }
                 }
