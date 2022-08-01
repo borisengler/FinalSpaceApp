@@ -2,8 +2,7 @@ package com.example.finalfinalspace.datamanagment.episodes
 
 import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
+import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
@@ -15,47 +14,30 @@ class EpisodesManager @Inject constructor(
 
     val episodes = episodesDAO.getAllEpisodes().distinctUntilChanged()
 
-    fun getEpisodeWithCharacters(id: Int): Flow<EpisodeWithCharactersInfo> {
-        return episodesDAO.getEpisode(id).combine(charInEpiDAO.getCharacterIdsInEpisodes(id)) { episode, characters ->
-            EpisodeWithCharactersInfo(
-                episode.id,
-                episode.name,
-                episode.airDate,
-                episode.director,
-                episode.writer,
-                episode.imageUrl,
-                characters
-            )
-        }
-    }
-
     suspend fun fetchEpisodeWithCharacters(id: Int): EpisodeWithCharactersInfo {
-        val episode = episodesDAO.fetchEpisode(id)
-        val characters = charInEpiDAO.fetchCharactersInEpisode(id)
-        return EpisodeWithCharactersInfo(
-            episode.id,
-            episode.name,
-            episode.airDate,
-            episode.director,
-            episode.writer,
-            episode.imageUrl,
-            characters)
-
+        return episodesDAO.fetchEpisodeWithCharacters(id)
     }
 
     suspend fun downloadEpisodes() {
         val episodesWithChars = finalSpaceAPI.getEpisodes()
-        for (episode: EpisodesWithCharsInfo in episodesWithChars) {
-            episodesDAO.insert(
+
+        episodesDAO.insertAll(
+            episodesWithChars.map { episode ->
                 EpisodesInfo(
                     episode.id,
                     episode.name,
                     episode.airDate,
                     episode.director,
                     episode.writer,
-                    episode.imageUrl
+                    episode.imageUrl,
                 )
-            )
-        }
+            }
+        )
+
+        charInEpiDAO.insertAll(
+            episodesWithChars.map {
+                it.characters.map { character -> CharInEpiInfo(it.id, character.split("/").last().toInt()) }
+            }.flatten()
+        )
     }
 }

@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuotesViewModel @Inject constructor(
-    private val quotesManager: QuotesManager
+    quotesManager: QuotesManager
 ) : ViewModel() {
 
     val quotes = quotesManager.quotes

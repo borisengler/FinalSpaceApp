@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "episodes")
 data class EpisodesInfo(
     @PrimaryKey(autoGenerate = false)
-    val id: Int = 0,
+    val episodeId: Int = 0,
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "air_date")
@@ -17,6 +17,5 @@ data class EpisodesInfo(
     @ColumnInfo(name = "writer")
     val writer: String,
     @ColumnInfo(name = "img_url")
-    val imageUrl: String,
+    val imageUrl: String
 )
-

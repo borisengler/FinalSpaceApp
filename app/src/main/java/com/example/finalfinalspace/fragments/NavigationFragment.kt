@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.finalfinalspace.R
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiManager
 import com.example.finalfinalspace.datamanagment.characters.CharactersManager
 import com.example.finalfinalspace.datamanagment.episodes.EpisodesManager
 import com.example.finalfinalspace.datamanagment.network.FinalSpaceDownloadManager
@@ -30,7 +29,6 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     @Inject lateinit var quotesManager: QuotesManager
     @Inject lateinit var charactersManager: CharactersManager
     @Inject lateinit var episodesManager: EpisodesManager
-    @Inject lateinit var charInEpiManager: CharInEpiManager
     private val scope = MainScope()
 
     override fun onCreateView(
@@ -63,7 +61,7 @@ class NavigationFragment : Fragment(), View.OnClickListener {
 
     private fun syncData() {
         scope.launch {
-            FinalSpaceDownloadManager(quotesManager, charactersManager, charInEpiManager, episodesManager).downloadAllData()
+            FinalSpaceDownloadManager(quotesManager, charactersManager, episodesManager).downloadAllData()
         }
     }
 

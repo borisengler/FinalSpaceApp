@@ -53,7 +53,7 @@ class EpisodesRWAdapter @Inject constructor() :
 
     class EpisodesDiffCallback : DiffUtil.ItemCallback<EpisodesInfo>() {
         override fun areItemsTheSame(oldItem: EpisodesInfo, newItem: EpisodesInfo): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.episodeId == newItem.episodeId
         }
 
         override fun areContentsTheSame(oldItem: EpisodesInfo, newItem: EpisodesInfo): Boolean {

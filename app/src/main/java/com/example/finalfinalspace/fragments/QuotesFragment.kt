@@ -34,7 +34,7 @@ class QuotesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 quotesVM.quotes.collectLatest {
-                        quotesRWAdapter.submitList(it)
+                    quotesRWAdapter.submitList(it)
                 }
             }
         }
