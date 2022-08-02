@@ -32,7 +32,8 @@ class EpisodesFragment : Fragment() {
     @Inject lateinit var episodesRWAdapter: EpisodesRWAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         if (container != null) {
@@ -65,9 +66,6 @@ class EpisodesFragment : Fragment() {
                 val bundle: Bundle = bundleOf("episodeId" to position + 1)
                 navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
             }
-
         })
-
     }
-
 }

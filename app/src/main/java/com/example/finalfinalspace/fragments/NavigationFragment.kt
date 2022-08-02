@@ -32,7 +32,8 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     private val scope = MainScope()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -48,7 +49,6 @@ class NavigationFragment : Fragment(), View.OnClickListener {
         view.findViewById<Button>(R.id.syncButton).setOnClickListener(this)
         view.findViewById<Button>(R.id.quotesButton).setOnClickListener(this)
         view.findViewById<Button>(R.id.episodesButton).setOnClickListener(this)
-
     }
 
     override fun onClick(v: View?) {
@@ -64,7 +64,4 @@ class NavigationFragment : Fragment(), View.OnClickListener {
             FinalSpaceDownloadManager(quotesManager, charactersManager, episodesManager).downloadAllData()
         }
     }
-
 }
-
-

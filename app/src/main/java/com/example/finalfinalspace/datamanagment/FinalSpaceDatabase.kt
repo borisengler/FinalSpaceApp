@@ -24,5 +24,4 @@ abstract class FinalSpaceDatabase : RoomDatabase() {
     abstract fun episodesDao(): EpisodesDAO
 
     abstract fun charInEpiDao(): CharInEpiDAO
-
 }

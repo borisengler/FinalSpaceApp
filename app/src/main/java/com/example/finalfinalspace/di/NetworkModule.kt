@@ -31,5 +31,4 @@ object NetworkModule {
         .baseUrl(BASE_URL)
         .build()
         .create(FinalSpaceAPI::class.java)
-
 }

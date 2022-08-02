@@ -10,5 +10,4 @@ class QuotesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val quotes = quotesManager.quotes
-
 }

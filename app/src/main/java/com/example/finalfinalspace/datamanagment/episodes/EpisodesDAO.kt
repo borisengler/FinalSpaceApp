@@ -19,5 +19,4 @@ interface EpisodesDAO {
     @Transaction
     @Query("SELECT * FROM episodes WHERE episodeId = :id")
     suspend fun fetchEpisodeWithCharacters(id: Int): EpisodeWithCharactersInfo
-
 }
