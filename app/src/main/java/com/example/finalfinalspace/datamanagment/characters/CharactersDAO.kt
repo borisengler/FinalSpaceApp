@@ -8,5 +8,4 @@ import androidx.room.OnConflictStrategy
 interface CharactersDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<CharactersInfo>): List<Long>
-
 }

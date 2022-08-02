@@ -27,7 +27,8 @@ class QuotesFragment : Fragment() {
     private val quotesVM: QuotesViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Get quotes data
@@ -47,5 +48,4 @@ class QuotesFragment : Fragment() {
 
         return view
     }
-
 }

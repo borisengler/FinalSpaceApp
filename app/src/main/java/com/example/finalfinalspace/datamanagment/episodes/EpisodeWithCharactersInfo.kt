@@ -15,4 +15,3 @@ data class EpisodeWithCharactersInfo(
     )
     val characters: List<CharactersInfo>
 )
-

@@ -46,5 +46,4 @@ object DatabaseModule {
             "final_space_db"
         ).fallbackToDestructiveMigration().build()
     }
-
 }
