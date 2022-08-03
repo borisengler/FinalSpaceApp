@@ -1,10 +1,12 @@
-package com.example.finalfinalspace.datamanagment.episodes
+package com.example.finalfinalspace.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
+import com.example.finalfinalspace.data.db.models.EpisodesInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao

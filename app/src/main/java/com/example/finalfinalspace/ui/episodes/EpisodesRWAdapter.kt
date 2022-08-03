@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.fragments.adapters
+package com.example.finalfinalspace.ui.episodes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.finalfinalspace.data.db.models.EpisodesInfo
 import com.example.finalfinalspace.databinding.EpisodeCardviewBinding
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 import javax.inject.Inject
 
 class EpisodesRWAdapter @Inject constructor() :
@@ -22,7 +22,7 @@ class EpisodesRWAdapter @Inject constructor() :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): EpisodesRWAdapter.EpisodeViewHolder {
+    ): EpisodeViewHolder {
         return EpisodeViewHolder(
             EpisodeCardviewBinding.inflate(
                 LayoutInflater.from(parent.context),

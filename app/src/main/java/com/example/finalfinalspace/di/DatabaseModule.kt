@@ -2,11 +2,11 @@ package com.example.finalfinalspace.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.finalfinalspace.datamanagment.FinalSpaceDatabase
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
-import com.example.finalfinalspace.datamanagment.characters.CharactersDAO
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesDAO
-import com.example.finalfinalspace.datamanagment.quotes.QuotesDAO
+import com.example.finalfinalspace.data.db.CharInEpiDAO
+import com.example.finalfinalspace.data.db.CharactersDAO
+import com.example.finalfinalspace.data.db.EpisodesDAO
+import com.example.finalfinalspace.data.db.FinalSpaceDatabase
+import com.example.finalfinalspace.data.db.QuotesDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

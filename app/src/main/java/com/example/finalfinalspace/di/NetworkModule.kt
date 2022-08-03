@@ -1,6 +1,6 @@
 package com.example.finalfinalspace.di
 
-import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
+import com.example.finalfinalspace.data.api.FinalSpaceAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

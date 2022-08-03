@@ -1,12 +1,12 @@
-package com.example.finalfinalspace.fragments.adapters
+package com.example.finalfinalspace.ui.quotes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalfinalspace.data.db.models.QuotesInfo
 import com.example.finalfinalspace.databinding.QuoteCardviewBinding
-import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
 import javax.inject.Inject
 
 class QuotesRWAdapter @Inject constructor() :
@@ -15,11 +15,11 @@ class QuotesRWAdapter @Inject constructor() :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): QuotesRWAdapter.QuoteViewHolder {
+    ): QuoteViewHolder {
         return QuoteViewHolder(QuoteCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    override fun onBindViewHolder(holder: QuotesRWAdapter.QuoteViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

@@ -1,8 +1,9 @@
-package com.example.finalfinalspace.datamanagment.characters
+package com.example.finalfinalspace.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import com.example.finalfinalspace.data.db.models.CharactersInfo
 
 @Dao
 interface CharactersDAO {

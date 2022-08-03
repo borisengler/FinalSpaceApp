@@ -1,11 +1,9 @@
-package com.example.finalfinalspace.datamanagment.charInEpi
+package com.example.finalfinalspace.data.db.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
-import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesInfo
 
 @Entity(
     primaryKeys = ["episodeId", "characterId"], tableName = "char_in_episode",

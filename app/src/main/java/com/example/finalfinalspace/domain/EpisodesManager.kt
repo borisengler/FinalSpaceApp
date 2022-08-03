@@ -1,10 +1,12 @@
-package com.example.finalfinalspace.datamanagment.episodes
+package com.example.finalfinalspace.domain
 
-import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
+import com.example.finalfinalspace.data.api.FinalSpaceAPI
+import com.example.finalfinalspace.data.db.CharInEpiDAO
+import com.example.finalfinalspace.data.db.EpisodesDAO
+import com.example.finalfinalspace.data.db.models.CharInEpiInfo
+import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
+import com.example.finalfinalspace.data.db.models.EpisodesInfo
 import kotlinx.coroutines.flow.distinctUntilChanged
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 class EpisodesManager @Inject constructor(

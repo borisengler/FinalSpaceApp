@@ -1,10 +1,11 @@
-package com.example.finalfinalspace
+package com.example.finalfinalspace.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
