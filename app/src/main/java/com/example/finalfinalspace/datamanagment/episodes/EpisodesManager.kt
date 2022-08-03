@@ -4,6 +4,7 @@ import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiDAO
 import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
 import kotlinx.coroutines.flow.distinctUntilChanged
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class EpisodesManager @Inject constructor(

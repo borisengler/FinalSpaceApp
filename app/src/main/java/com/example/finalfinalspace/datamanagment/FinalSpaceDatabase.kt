@@ -13,7 +13,7 @@ import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
 
 @Database(
     entities = [QuotesInfo::class, CharactersInfo::class, EpisodesInfo::class, CharInEpiInfo::class],
-    version = 7, exportSchema = false
+    version = 9, exportSchema = false
 )
 abstract class FinalSpaceDatabase : RoomDatabase() {
 
