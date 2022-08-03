@@ -10,18 +10,19 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frame"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/none"
+        android:layout_height="@dimen/none"
         app:layout_constraintBottom_toTopOf="@+id/navigationbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:defaultNavHost="true"
         app:navGraph="@navigation/new_navigation"
+        android:background="@color/colorPrimaryVariant"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="0dp"
+        android:layout_width="@dimen/none"
         android:layout_height="wrap_content"
         android:id="@+id/navigationbar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,6 +30,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frame"
         app:menu="@menu/bottom_nav_menu"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorOnPrimary"
+        app:itemTextColor="@color/colorOnPrimary"
+        app:itemTextAppearanceActive="@color/colorOnSecondary"
+        app:itemActiveIndicatorStyle="@color/colorSecondary"
         >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -43,10 +49,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
+        app:titleTextColor="@color/colorOnPrimary"
         />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.data.db.models.QuotesInfo
-import com.example.finalfinalspace.databinding.QuoteCardviewBinding
+import com.example.finalfinalspace.databinding.ItemQuoteBinding
 import javax.inject.Inject
 
 class QuotesRWAdapter @Inject constructor() :
@@ -16,14 +16,14 @@ class QuotesRWAdapter @Inject constructor() :
         parent: ViewGroup,
         viewType: Int
     ): QuoteViewHolder {
-        return QuoteViewHolder(QuoteCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return QuoteViewHolder(ItemQuoteBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class QuoteViewHolder(private val binding: QuoteCardviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class QuoteViewHolder(private val binding: ItemQuoteBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(info: QuotesInfo) {
             binding.quoteAuthor.text = info.by

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalfinalspace.data.db.models.EpisodesInfo
-import com.example.finalfinalspace.databinding.EpisodeCardviewBinding
+import com.example.finalfinalspace.databinding.ItemEpisodeBinding
 import javax.inject.Inject
 
 class EpisodesRWAdapter @Inject constructor() :
@@ -24,7 +24,7 @@ class EpisodesRWAdapter @Inject constructor() :
         viewType: Int
     ): EpisodeViewHolder {
         return EpisodeViewHolder(
-            EpisodeCardviewBinding.inflate(
+            ItemEpisodeBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,7 +38,7 @@ class EpisodesRWAdapter @Inject constructor() :
     }
 
     inner class EpisodeViewHolder(
-        private val binding: EpisodeCardviewBinding,
+        private val binding: ItemEpisodeBinding,
         listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
