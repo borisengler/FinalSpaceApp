@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.fragments
+package com.example.finalfinalspace.ui.episodes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.FragmentEpisodeBinding
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

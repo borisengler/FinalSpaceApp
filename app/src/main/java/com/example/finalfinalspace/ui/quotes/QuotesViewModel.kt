@@ -1,8 +1,9 @@
-package com.example.finalfinalspace.datamanagment.quotes
+package com.example.finalfinalspace.ui.quotes
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
+import com.example.finalfinalspace.domain.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow

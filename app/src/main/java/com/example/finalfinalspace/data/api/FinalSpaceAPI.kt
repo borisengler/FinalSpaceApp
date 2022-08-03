@@ -1,8 +1,8 @@
-package com.example.finalfinalspace.datamanagment
+package com.example.finalfinalspace.data.api
 
-import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesWithCharsInfo
-import com.example.finalfinalspace.datamanagment.quotes.QuotesInfo
+import com.example.finalfinalspace.data.api.models.EpisodesWithCharsInfo
+import com.example.finalfinalspace.data.db.models.CharactersInfo
+import com.example.finalfinalspace.data.db.models.QuotesInfo
 import retrofit2.http.GET
 
 interface FinalSpaceAPI {

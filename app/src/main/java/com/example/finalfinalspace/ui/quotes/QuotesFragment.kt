@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.fragments
+package com.example.finalfinalspace.ui.quotes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.finalfinalspace.R
-import com.example.finalfinalspace.databinding.FragmentEpisodesBinding
 import com.example.finalfinalspace.databinding.FragmentQuotesBinding
-import com.example.finalfinalspace.datamanagment.quotes.QuotesViewModel
-import com.example.finalfinalspace.fragments.adapters.QuotesRWAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -37,7 +33,6 @@ class QuotesFragment : Fragment() {
     ): View {
 
         binding = FragmentQuotesBinding.inflate(inflater, container, false)
-
 
         // Get quotes data
         viewLifecycleOwner.lifecycleScope.launch {
@@ -63,12 +58,10 @@ class QuotesFragment : Fragment() {
                         ).show()
                     }
                 }
-
             }
         }
 
         // set the recyclerview
-        val view: View = inflater.inflate(R.layout.fragment_quotes, container, false)
         val recyclerView: RecyclerView = binding.quotes
         recyclerView.layoutManager = LinearLayoutManager(container!!.context)
         recyclerView.adapter = quotesRWAdapter

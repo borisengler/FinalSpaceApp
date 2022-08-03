@@ -1,6 +1,7 @@
-package com.example.finalfinalspace.datamanagment.quotes
+package com.example.finalfinalspace.domain
 
-import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
+import com.example.finalfinalspace.data.api.FinalSpaceAPI
+import com.example.finalfinalspace.data.db.QuotesDAO
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 

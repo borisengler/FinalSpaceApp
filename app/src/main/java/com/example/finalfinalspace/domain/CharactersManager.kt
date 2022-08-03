@@ -1,8 +1,7 @@
-package com.example.finalfinalspace.datamanagment.characters
+package com.example.finalfinalspace.domain
 
-import android.widget.Toast
-import com.example.finalfinalspace.datamanagment.FinalSpaceAPI
-import java.net.UnknownHostException
+import com.example.finalfinalspace.data.api.FinalSpaceAPI
+import com.example.finalfinalspace.data.db.CharactersDAO
 import javax.inject.Inject
 
 class CharactersManager @Inject constructor(

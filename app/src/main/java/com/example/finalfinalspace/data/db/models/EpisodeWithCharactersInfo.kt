@@ -1,10 +1,8 @@
-package com.example.finalfinalspace.datamanagment.episodes
+package com.example.finalfinalspace.data.db.models
 
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.example.finalfinalspace.datamanagment.charInEpi.CharInEpiInfo
-import com.example.finalfinalspace.datamanagment.characters.CharactersInfo
 
 data class EpisodeWithCharactersInfo(
     @Embedded val episode: EpisodesInfo,

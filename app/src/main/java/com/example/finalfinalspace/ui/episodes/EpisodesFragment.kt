@@ -1,7 +1,6 @@
-package com.example.finalfinalspace.fragments
+package com.example.finalfinalspace.ui.episodes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.FragmentEpisodesBinding
-import com.example.finalfinalspace.datamanagment.episodes.EpisodesViewModel
-import com.example.finalfinalspace.fragments.adapters.EpisodesRWAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

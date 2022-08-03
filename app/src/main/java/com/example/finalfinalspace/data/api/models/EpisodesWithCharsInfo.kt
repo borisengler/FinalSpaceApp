@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.datamanagment.episodes
+package com.example.finalfinalspace.data.api.models
 
 import com.squareup.moshi.Json
 

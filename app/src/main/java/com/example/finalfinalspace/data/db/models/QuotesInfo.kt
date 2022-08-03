@@ -1,4 +1,4 @@
-package com.example.finalfinalspace.datamanagment.quotes
+package com.example.finalfinalspace.data.db.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

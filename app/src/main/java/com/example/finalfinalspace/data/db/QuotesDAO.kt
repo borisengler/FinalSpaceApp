@@ -1,9 +1,10 @@
-package com.example.finalfinalspace.datamanagment.quotes
+package com.example.finalfinalspace.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.finalfinalspace.data.db.models.QuotesInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
