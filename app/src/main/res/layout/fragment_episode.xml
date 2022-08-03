@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.EpisodeFragment">
+    tools:context=".fragments.EpisodeFragment"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
 
         <TextView
@@ -18,14 +21,15 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:gravity="center"
             android:textColor="#FFFFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:gravity="center"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/episodeDate"
@@ -33,11 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:textColor="#FFFFFFFF"
             android:gravity="center"
+            android:textColor="#FFFFFFFF"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeName" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeName"
+            />
 
         <TextView
             android:id="@+id/episodeDirector"
@@ -45,11 +50,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textColor="#FFFFFFFF"
             android:gravity="center"
+            android:textColor="#FFFFFFFF"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeDate" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeDate"
+            />
 
         <TextView
             android:id="@+id/episodeWriter"
@@ -57,10 +63,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textColor="#FFFFFFFF"
             android:text="Writer: "
+            android:textColor="#FFFFFFFF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeDirector" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeDirector"
+            />
 
         <TextView
             android:id="@+id/characters"
@@ -68,10 +75,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:textColor="#FFFFFFFF"
             android:text="Characters: "
+            android:textColor="#FFFFFFFF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeWriter" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
+            />
 
         <ImageView
             android:id="@+id/episodeImage"
@@ -85,7 +93,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/episodeCharacters"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            />
 
         <TextView
             android:id="@+id/episodeCharacters"
@@ -96,7 +105,8 @@
             android:textColor="#FFFFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/characters"
-            app:layout_constraintTop_toBottomOf="@+id/episodeWriter" />
+            app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

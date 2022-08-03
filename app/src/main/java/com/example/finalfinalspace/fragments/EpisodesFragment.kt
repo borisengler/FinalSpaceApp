@@ -39,7 +39,6 @@ class EpisodesFragment : Fragment() {
         if (container != null) {
             ctx = container.context
         }
-
         // Get episodes data
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -64,7 +63,7 @@ class EpisodesFragment : Fragment() {
         episodesRWAdapter.setOnClickListener(object : EpisodesRWAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val bundle: Bundle = bundleOf("episodeId" to position + 1)
-                navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
+                navController.navigate(R.id.action_episodesFragment2_to_episodeFragment2, bundle)
             }
         })
     }

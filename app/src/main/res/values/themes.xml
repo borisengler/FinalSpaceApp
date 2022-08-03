@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.FinalFinalSpace" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FinalFinalSpace" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#000063</item>
         <item name="colorPrimaryVariant">#311b92</item>
@@ -9,7 +9,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#1faa00</item>
         <item name="colorSecondaryVariant">#64dd17</item>
-        <item name="colorOnSecondary">#000000</item>
+        <item name="colorOnSecondary">#FDFAFA</item>
 
         <item name="android:windowBackground">#6746c3</item>
         <!-- Status bar color. -->
