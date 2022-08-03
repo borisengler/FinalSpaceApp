@@ -8,5 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="colorPrimary">#76ff03</color>
+    <color name="colorPrimaryVariant">#b0ff57</color>
+    <color name="colorPrimaryVariantDark">#32cb00</color>
+    <color name="colorOnPrimary">#000000</color>
+
+    <color name="colorSecondary">#8e24aa</color>
+    <color name="colorSecondaryVariant">#c158dc</color>
+    <color name="colorOnSecondary">#ffffff</color>
+
+    <color name="cardColor">#FFFFFFFF</color>
+    <color name="textColor">#202020</color>
+    <color name="textBGColor">#88EFEAEA</color>
 
 </resources>
