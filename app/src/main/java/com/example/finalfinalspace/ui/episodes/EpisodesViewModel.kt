@@ -1,5 +1,6 @@
 package com.example.finalfinalspace.ui.episodes
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
@@ -47,6 +48,7 @@ class EpisodesViewModel @Inject constructor(
                 episodesManager.downloadEpisodes()
             }.onFailure {
                 _errorMessage.emit(Unit)
+                Log.d("err", it.message.toString())
             }
         }
     }

@@ -44,34 +44,48 @@
                 />
 
 
-            <TextView
-                android:id="@+id/episode_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium"
-                android:layout_marginEnd="@dimen/medium"
-                android:layout_marginBottom="@dimen/medium"
-                android:textColor="@color/textColor"
-                android:textSize="@dimen/textLarge"
-                app:layout_constraintBottom_toBottomOf="@+id/episode_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/episode_date"
-                tools:text="Episode name"
-                android:background="@color/textBGColor"/>
-
-            <TextView
-                android:id="@+id/episode_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:layout_marginStart="@dimen/medium"
-                android:layout_marginBottom="@dimen/medium"
-                app:layout_constraintStart_toStartOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_black_gradient"
                 app:layout_constraintBottom_toBottomOf="@+id/episode_img"
-                tools:text="date"
-                android:background="@color/textBGColor"
-                android:textSize="@dimen/textMedium"
-                />
+                app:layout_constraintEnd_toEndOf="@id/episode_img"
+                app:layout_constraintStart_toStartOf="@+id/episode_img"
+                app:layout_constraintTop_toTopOf="@+id/episode_img"
+                >
+
+                <TextView
+                    android:id="@+id/episode_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginEnd="@dimen/medium"
+                    android:layout_marginBottom="@dimen/medium"
+                    android:textColor="@color/colorOnSecondary"
+                    android:textSize="@dimen/textLarge"
+                    app:layout_constraintBottom_toBottomOf="@+id/episode_date"
+                    app:layout_constraintBottom_toTopOf="@+id/episode_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Episode name"
+                    />
+
+                <TextView
+                    android:id="@+id/episode_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium"
+                    android:layout_marginBottom="@dimen/medium"
+                    android:textColor="@color/colorOnSecondary"
+                    android:textSize="@dimen/textMedium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="date"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

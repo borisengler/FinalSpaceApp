@@ -9,7 +9,7 @@ import com.example.finalfinalspace.data.db.models.QuotesInfo
 
 @Database(
     entities = [QuotesInfo::class, CharactersInfo::class, EpisodesInfo::class, CharInEpiInfo::class],
-    version = 9, exportSchema = false
+    version = 12, exportSchema = false
 )
 abstract class FinalSpaceDatabase : RoomDatabase() {
 

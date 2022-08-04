@@ -11,6 +11,7 @@
         android:name="com.example.finalfinalspace.ui.episodes.EpisodesFragment"
         android:label="@string/episodes"
         tools:layout="@layout/fragment_episodes"
+
         >
         <action
             android:id="@+id/action_episodesFragment2_to_episodeFragment2"
@@ -22,6 +23,7 @@
         android:name="com.example.finalfinalspace.ui.quotes.QuotesFragment"
         android:label="@string/quotes"
         tools:layout="@layout/fragment_quotes"
+
         />
     <fragment
         android:id="@+id/episodeFragment2"
