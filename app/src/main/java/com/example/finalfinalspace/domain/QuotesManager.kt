@@ -11,6 +11,7 @@ class QuotesManager @Inject constructor(
 ) {
 
     val quotes = quotesDAO.getAllQuotes().distinctUntilChanged()
+    val quotesByCharacters = quotesDAO.getCharactersWithQuotes().distinctUntilChanged()
 
     suspend fun downloadQuotes() {
         quotesDAO.insertAll(finalSpaceAPI.getQuotes())

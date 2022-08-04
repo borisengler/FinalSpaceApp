@@ -21,12 +21,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/quote_text"
+                android:id="@+id/quoteText"
                 android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/large"
-                android:layout_marginTop="@dimen/large"
-                android:layout_marginEnd="@dimen/large"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:layout_marginBottom="@dimen/medium"
                 android:gravity="start"
                 tools:text="Quotetet"
                 android:textColor="@color/colorOnPrimary"
@@ -34,22 +35,8 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/quote_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/large"
-                android:layout_marginEnd="@dimen/large"
-                android:layout_marginBottom="@dimen/large"
-                tools:text="author"
-                android:textColor="@color/colorOnPrimary"
-                android:textSize="@dimen/textLarge"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/quote_text" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -18,7 +18,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:defaultNavHost="true"
         app:navGraph="@navigation/new_navigation"
-        android:background="@color/colorPrimaryVariant"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -33,8 +32,6 @@
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/colorOnPrimary"
         app:itemTextColor="@color/colorOnPrimary"
-        app:itemTextAppearanceActive="@color/colorOnSecondary"
-        app:itemActiveIndicatorStyle="@color/colorSecondary"
         >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

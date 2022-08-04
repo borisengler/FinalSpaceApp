@@ -38,7 +38,16 @@ class QuotesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    quotesVM.quotes.collectLatest {
+                    quotesVM.errorMessage.collectLatest {
+                        Toast.makeText(
+                            context,
+                            "Unable to sync data",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                launch {
+                    quotesVM.quotesByCharacters.collectLatest {
                         if (it.isNotEmpty()) {
                             binding.quotes.visibility = View.VISIBLE
                             binding.empty.visibility = View.GONE
@@ -47,15 +56,6 @@ class QuotesFragment : Fragment() {
                             binding.quotes.visibility = View.GONE
                             binding.empty.visibility = View.VISIBLE
                         }
-                    }
-                }
-                launch {
-                    quotesVM.errorMessage.collectLatest {
-                        Toast.makeText(
-                            context,
-                            "Unable to sync data",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
             }

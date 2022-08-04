@@ -9,7 +9,9 @@
 
     <dimen name="textSmall">14sp</dimen>
     <dimen name="textMedium">16sp</dimen>
-    <dimen name="textLarge">18dsp</dimen>
-    <dimen name="headline">24dsp</dimen>
+    <dimen name="textLarge">18sp</dimen>
+    <dimen name="headline">24sp</dimen>
+
+    <dimen name="characterIcon">46dp</dimen>
 
 </resources>

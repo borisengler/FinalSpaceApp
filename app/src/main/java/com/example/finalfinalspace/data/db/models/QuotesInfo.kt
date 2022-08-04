@@ -12,4 +12,9 @@ data class QuotesInfo(
     val quote: String,
     @ColumnInfo(name = "by_who")
     val by: String,
-)
+) : QuoteOrCharacter {
+    override val uid: String
+        get() = id.toString() + quote
+    override val type: Int
+        get() = 1
+}

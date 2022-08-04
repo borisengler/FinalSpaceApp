@@ -42,7 +42,6 @@
                     android:layout_marginEnd="@dimen/medium"
                     android:layout_marginBottom="@dimen/medium"
                     android:addStatesFromChildren="false"
-                    android:background="@color/colorPrimaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
