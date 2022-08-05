@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.databinding.FragmentQuotesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +32,17 @@ class QuotesFragment : Fragment() {
     ): View {
 
         binding = FragmentQuotesBinding.inflate(inflater, container, false)
+
+        // set the recyclerview
+        with(binding.quotes) {
+            adapter = quotesRWAdapter
+            adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
+
+        // set refresh swipe
+        binding.quotesRefresh.setOnRefreshListener {
+            quotesVM.downloadData()
+        }
 
         // Get quotes data
         viewLifecycleOwner.lifecycleScope.launch {
@@ -58,19 +68,12 @@ class QuotesFragment : Fragment() {
                         }
                     }
                 }
+                launch {
+                    quotesVM.downloading.collectLatest {
+                        binding.quotesRefresh.isRefreshing = it
+                    }
+                }
             }
-        }
-
-        // set the recyclerview
-        val recyclerView: RecyclerView = binding.quotes
-        recyclerView.layoutManager = LinearLayoutManager(container!!.context)
-        recyclerView.adapter = quotesRWAdapter
-
-        // set refresh swipe
-        val swipeRefreshLayout = binding.quotesRefresh
-        swipeRefreshLayout.setOnRefreshListener {
-            quotesVM.downloadData()
-            swipeRefreshLayout.isRefreshing = false
         }
 
         return binding.root

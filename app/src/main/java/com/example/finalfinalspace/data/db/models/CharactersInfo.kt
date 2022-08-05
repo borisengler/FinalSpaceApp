@@ -18,6 +18,4 @@ data class CharactersInfo(
 ) : QuoteOrCharacter {
     override val uid: String
         get() = id.toString() + name
-    override val type: Int
-        get() = 0
 }

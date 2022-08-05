@@ -15,6 +15,4 @@ data class QuotesInfo(
 ) : QuoteOrCharacter {
     override val uid: String
         get() = id.toString() + quote
-    override val type: Int
-        get() = 1
 }

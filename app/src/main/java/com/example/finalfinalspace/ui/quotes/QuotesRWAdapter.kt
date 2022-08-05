@@ -15,12 +15,19 @@ import javax.inject.Inject
 
 class QuotesRWAdapter @Inject constructor() :
     ListAdapter<QuoteOrCharacter, RecyclerView.ViewHolder>(QuoteOrCharacterDiffCallback()) {
+
+    companion object {
+        private const val TYPE_CHARACTER = 0
+        private const val TYPE_QUOTE = 1
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
         return when (viewType) {
-            0 -> CharacterViewHolder(ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            TYPE_CHARACTER ->
+                CharacterViewHolder(ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             else -> {
                 QuoteViewHolder(ItemQuoteBinding.inflate(LayoutInflater.from(parent.context), parent, false))
             }
@@ -35,7 +42,12 @@ class QuotesRWAdapter @Inject constructor() :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return getItem(position).type
+        return when (getItem(position)) {
+            is CharactersInfo -> TYPE_CHARACTER
+            else -> {
+                TYPE_QUOTE
+            }
+        }
     }
 
     inner class QuoteViewHolder(private val binding: ItemQuoteBinding) : RecyclerView.ViewHolder(binding.root) {

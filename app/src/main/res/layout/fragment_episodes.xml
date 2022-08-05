@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.episodes.EpisodesFragment">
+    tools:context=".ui.episodes.EpisodesFragment"
+    >
 
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/episodes_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/episodes_refresh"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:text="@string/no_data_available_sync_your_data_first"
+                android:textSize="@dimen/textLarge"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/episodes_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/none"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_marginTop="@dimen/medium"
+                android:layout_marginEnd="@dimen/medium"
+                android:layout_marginBottom="@dimen/medium"
+                android:addStatesFromChildren="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_episode"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <TextView
-                    android:id="@+id/empty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/medium"
-                    android:layout_marginStart="@dimen/medium"
-                    android:layout_marginEnd="@dimen/medium"
-                    android:textSize="@dimen/textLarge"
-                    android:text="@string/no_data_available_sync_your_data_first"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="gone"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/episodes_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/none"
-                    android:layout_marginStart="@dimen/medium"
-                    android:layout_marginTop="@dimen/medium"
-                    android:layout_marginEnd="@dimen/medium"
-                    android:layout_marginBottom="@dimen/medium"
-                    android:addStatesFromChildren="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item_episode"
-
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-></androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>
