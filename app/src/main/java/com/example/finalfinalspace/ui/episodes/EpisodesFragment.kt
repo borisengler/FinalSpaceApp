@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.FragmentEpisodesBinding
@@ -36,6 +35,18 @@ class EpisodesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEpisodesBinding.inflate(inflater, container, false)
+
+        // set the recyclerview
+        with(binding.episodesRecyclerView) {
+            adapter = episodesRWAdapter
+            adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
+
+        // set refresh swipe
+        val swipeRefreshLayout = binding.episodesRefresh
+        swipeRefreshLayout.setOnRefreshListener {
+            episodesVM.downloadData()
+        }
 
         // Get episodes data
         viewLifecycleOwner.lifecycleScope.launch {
@@ -61,21 +72,13 @@ class EpisodesFragment : Fragment() {
                         ).show()
                     }
                 }
+                launch {
+                    episodesVM.downloading.collectLatest {
+                        binding.episodesRefresh.isRefreshing = it
+                    }
+                }
             }
         }
-
-        // set the recyclerview
-        val recyclerView: RecyclerView = binding.episodesRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = episodesRWAdapter
-
-        // set refresh swipe
-        val swipeRefreshLayout = binding.episodesRefresh
-        swipeRefreshLayout.setOnRefreshListener {
-            episodesVM.downloadData()
-            swipeRefreshLayout.isRefreshing = false
-        }
-
         return binding.root
     }
 
@@ -85,7 +88,7 @@ class EpisodesFragment : Fragment() {
         episodesRWAdapter.setOnClickListener(object : EpisodesRWAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val bundle: Bundle = bundleOf("episodeId" to position + 1)
-                navController.navigate(R.id.action_episodesFragment2_to_episodeFragment2, bundle)
+                navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
             }
         })
     }

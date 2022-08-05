@@ -1,57 +1,46 @@
-package com.example.finalfinalspace.ui.episodes
+package com.example.finalfinalspace.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
+import com.example.finalfinalspace.data.prefs.SettingsStorage
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
 import com.example.finalfinalspace.domain.CharactersManager
 import com.example.finalfinalspace.domain.EpisodesManager
+import com.example.finalfinalspace.domain.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EpisodesViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val episodesManager: EpisodesManager,
     private val charactersManager: CharactersManager,
+    private val quotesManager: QuotesManager,
+    private val settingsStorage: SettingsStorage,
     @IoDispatcher val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private val _errorMessage = MutableSharedFlow<Unit>()
-    val errorMessage = _errorMessage.asSharedFlow()
 
-    private val _downloading = MutableStateFlow(false)
-    val downloading = _downloading.asStateFlow()
+    private val _downloadStatus = MutableSharedFlow<Boolean>()
+    val downloadStatus = _downloadStatus.asSharedFlow()
 
-    val episodes = episodesManager.episodes
-
-    private val _episodeWithCharacters = MutableStateFlow<EpisodeWithCharactersInfo?>(null)
-
-    val episodeWithCharacters = _episodeWithCharacters.asStateFlow()
-
-    fun loadEpisodeWithCharacters(id: Int) {
-        viewModelScope.launch {
-            _episodeWithCharacters.emit(episodesManager.fetchEpisodeWithCharacters(id))
-        }
-    }
+    val autoSync get() = settingsStorage.getAutoSync()
 
     fun downloadData() {
         Log.d("Downloading", "...")
         viewModelScope.launch(ioDispatcher) {
-            _downloading.emit(true)
             runCatching {
                 charactersManager.downloadCharacters()
                 episodesManager.downloadEpisodes()
+                quotesManager.downloadQuotes()
             }.onFailure {
-                _errorMessage.emit(Unit)
+                _downloadStatus.emit(false)
                 Log.d("err", it.message.toString())
             }
-            _downloading.emit(false)
+            _downloadStatus.emit(true)
         }
     }
 }

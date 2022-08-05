@@ -4,31 +4,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_navigation"
-    app:startDestination="@id/episodesFragment2"
+    app:startDestination="@id/episodesFragment"
     >
     <fragment
-        android:id="@+id/episodesFragment2"
+        android:id="@+id/episodesFragment"
         android:name="com.example.finalfinalspace.ui.episodes.EpisodesFragment"
         android:label="@string/episodes"
         tools:layout="@layout/fragment_episodes"
 
         >
         <action
-            android:id="@+id/action_episodesFragment2_to_episodeFragment2"
-            app:destination="@id/episodeFragment2"
+            android:id="@+id/action_episodesFragment_to_episodeFragment"
+            app:destination="@id/episodeFragment"
             />
     </fragment>
     <fragment
-        android:id="@+id/quotesFragment2"
+        android:id="@+id/quotesFragment"
         android:name="com.example.finalfinalspace.ui.quotes.QuotesFragment"
         android:label="@string/quotes"
         tools:layout="@layout/fragment_quotes"
 
         />
     <fragment
-        android:id="@+id/episodeFragment2"
+        android:id="@+id/episodeFragment"
         android:name="com.example.finalfinalspace.ui.episodes.EpisodeFragment"
         android:label="@string/episodes"
         tools:layout="@layout/fragment_episode"
+        />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.finalfinalspace.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings"
         />
 </navigation>
