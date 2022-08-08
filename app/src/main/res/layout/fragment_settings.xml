@@ -72,7 +72,6 @@
             android:textSize="@dimen/textLarge"
             />
 
-
         <Button
             android:id="@+id/API"
             android:layout_width="0dp"

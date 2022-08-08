@@ -7,9 +7,6 @@
     android:layout_margin="@dimen/medium"
     >
 
-
-
-
     <ImageView
         android:id="@+id/characterImg"
         android:layout_width="@dimen/characterIcon"
@@ -48,7 +45,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="author"
         />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

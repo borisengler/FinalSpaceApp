@@ -8,7 +8,6 @@
     tools:context=".ui.episodes.EpisodesFragment"
     >
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/episodes_refresh"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-
 
             <TextView
                 android:id="@+id/empty"
@@ -55,7 +53,6 @@
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

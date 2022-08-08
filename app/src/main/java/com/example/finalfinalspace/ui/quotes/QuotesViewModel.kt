@@ -1,6 +1,5 @@
 package com.example.finalfinalspace.ui.quotes
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,12 +42,12 @@ class QuotesViewModel @Inject constructor(
         }.flowOn(ioDispatcher)
 
     fun downloadData() {
-        Log.d("Downloading", "...")
         viewModelScope.launch(ioDispatcher) {
             _downloading.emit(true)
             runCatching {
                 quotesManager.downloadQuotes()
             }.onFailure {
+                Timber.e(it.message)
                 _errorMessage.emit(Unit)
             }
             _downloading.emit(false)

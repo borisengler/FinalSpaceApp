@@ -23,28 +23,28 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class EpisodesFragment : Fragment() {
+    @Inject lateinit var episodesRWAdapter: EpisodesRWAdapter
 
     private lateinit var navController: NavController
     private val episodesVM: EpisodesViewModel by viewModels()
-    @Inject lateinit var episodesRWAdapter: EpisodesRWAdapter
-    private lateinit var binding: FragmentEpisodesBinding
+    private var binding: FragmentEpisodesBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentEpisodesBinding.inflate(inflater, container, false)
 
         // set the recyclerview
-        with(binding.episodesRecyclerView) {
-            adapter = episodesRWAdapter
-            adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        with(binding?.episodesRecyclerView) {
+            this?.adapter = episodesRWAdapter
+            this?.adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
 
         // set refresh swipe
-        val swipeRefreshLayout = binding.episodesRefresh
-        swipeRefreshLayout.setOnRefreshListener {
+        val swipeRefreshLayout = binding?.episodesRefresh
+        swipeRefreshLayout?.setOnRefreshListener {
             episodesVM.downloadData()
         }
 
@@ -54,12 +54,12 @@ class EpisodesFragment : Fragment() {
                 launch {
                     episodesVM.episodes.collectLatest {
                         if (it.isNotEmpty()) {
-                            binding.episodesRecyclerView.visibility = View.VISIBLE
-                            binding.empty.visibility = View.GONE
+                            binding?.episodesRecyclerView?.visibility = View.VISIBLE
+                            binding?.empty?.visibility = View.GONE
                             episodesRWAdapter.submitList(it)
                         } else {
-                            binding.episodesRecyclerView.visibility = View.GONE
-                            binding.empty.visibility = View.VISIBLE
+                            binding?.episodesRecyclerView?.visibility = View.GONE
+                            binding?.empty?.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -67,29 +67,34 @@ class EpisodesFragment : Fragment() {
                     episodesVM.errorMessage.collectLatest {
                         Toast.makeText(
                             context,
-                            "Unable to sync data",
+                            getString(R.string.unableToSync),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
                 launch {
                     episodesVM.downloading.collectLatest {
-                        binding.episodesRefresh.isRefreshing = it
+                        binding?.episodesRefresh?.isRefreshing = it
                     }
                 }
             }
         }
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         episodesRWAdapter.setOnClickListener(object : EpisodesRWAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val bundle: Bundle = bundleOf("episodeId" to position + 1)
+            override fun onItemClick(id: Int) {
+                val bundle: Bundle = bundleOf("episodeId" to id)
                 navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

@@ -1,6 +1,5 @@
 package com.example.finalfinalspace.ui.episodes
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
@@ -14,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,15 +41,14 @@ class EpisodesViewModel @Inject constructor(
     }
 
     fun downloadData() {
-        Log.d("Downloading", "...")
         viewModelScope.launch(ioDispatcher) {
             _downloading.emit(true)
             runCatching {
                 charactersManager.downloadCharacters()
                 episodesManager.downloadEpisodes()
             }.onFailure {
+                Timber.e(it.message)
                 _errorMessage.emit(Unit)
-                Log.d("err", it.message.toString())
             }
             _downloading.emit(false)
         }

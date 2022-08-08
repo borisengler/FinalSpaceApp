@@ -5,8 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,16 +20,24 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment(), View.OnClickListener {
+class SettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentSettingsBinding
+    private var binding: FragmentSettingsBinding? = null
     private val settingsVM: SettingsViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    companion object {
+        const val API_URL = "https://finalspaceapi.com/"
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FrameLayout? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        binding.autoSync.isChecked = settingsVM.autoSync
-        binding.version.text = getString(R.string.version, settingsVM.getVersion())
+        binding?.autoSync?.isChecked = settingsVM.autoSync
+        binding?.version?.text = getString(R.string.version, settingsVM.getVersion())
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -38,13 +46,13 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                         if (it) {
                             Toast.makeText(
                                 context,
-                                "Data downloaded",
+                                getString(R.string.dataDownloaded),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             Toast.makeText(
                                 context,
-                                "Unable to sync data",
+                                getString(R.string.unableToSync),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -52,22 +60,11 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 }
             }
         }
+        binding?.syncAll?.setOnClickListener { syncData() }
+        binding?.autoSync?.setOnClickListener { autoSync() }
+        binding?.API?.setOnClickListener { openApiDialog() }
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.syncAll.setOnClickListener(this)
-        binding.autoSync.setOnClickListener(this)
-        binding.API.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when (v) {
-            binding.syncAll -> syncData()
-            binding.autoSync -> autoSync()
-            binding.API -> openApiDialog()
-        }
+        return binding?.root
     }
 
     private fun syncData() {
@@ -75,17 +72,17 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun autoSync() {
-        settingsVM.setAutoSync(binding.autoSync.isChecked)
+        settingsVM.setAutoSync(binding?.autoSync?.isChecked ?: true)
     }
 
     private fun openApiDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        builder.setMessage("This will take you outside the app. Proceed?")
+        builder.setMessage(getString(R.string.dialogLeaveApp))
             .setCancelable(false)
-            .setPositiveButton("OK") { _, _ ->
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 goToApi()
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                 dialog.cancel()
             }
         val alert = builder.create()
@@ -93,7 +90,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun goToApi() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(SettingsViewModel.API_URL))
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(API_URL))
         startActivity(browserIntent)
     }
 }

@@ -16,47 +16,45 @@ import com.example.finalfinalspace.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
     private lateinit var navController: NavController
     private val mainVM: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.frame) as NavHostFragment
         navController = navHostFragment.navController
 
-        binding.toolbar.setupWithNavController(
+        binding?.toolbar?.setupWithNavController(
             navController,
             AppBarConfiguration(setOf(R.id.episodesFragment, R.id.quotesFragment, R.id.settingsFragment))
         )
 
-        binding.navigationbar.setupWithNavController(navController)
-
-        if (mainVM.autoSync) {
-            mainVM.downloadData()
-        }
+        binding?.navigationbar?.setupWithNavController(navController)
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     mainVM.downloadStatus.collectLatest {
+                        Timber.d(it.toString())
                         if (it) {
                             Toast.makeText(
                                 this@MainActivity,
-                                "Data downloaded",
+                                getString(R.string.dataDownloaded),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             Toast.makeText(
                                 this@MainActivity,
-                                "Unable to sync data",
+                                getString(R.string.unableToSync),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

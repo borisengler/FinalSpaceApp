@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final Space</string>
+    <string name="episodes">Epizódy</string>
+    <string name="quotes">Hlášky</string>
+    <string name="settings">Nastavenia</string>
+    <string name="sync_data">Synchronizovať dáta</string>
+    <string name="no_data_available_sync_your_data_first">Dáta nie sú k dispozicií, synchronizujte dáta</string>
+    <string name="episodeName">Epizóda: </string>
+    <string name="episodeAirDate">Dátum vysielania: %1$s</string>
+    <string name="episodeDirector">Režisér: %1$s</string>
+    <string name="episodeWriter">Editor: %1$s</string>
+    <string name="downloadData">Stiahnuť dáta</string>
+    <string name="visitAPI">Otvoriť API</string>
+    <string name="autoSync">Automatická synchronizácia</string>
+    <string name="version">Verzia: %s</string>
+    <string name="author">Autor: Boris Engler</string>
+    <string name="dialogLeaveApp">Týmto opustíš aplikáciu. Pokračovať?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="dataDownloaded">Dáta sú stiahnuté</string>
+    <string name="unableToSync">Nepodarilo sa stiahnuť dáta</string>
+</resources>

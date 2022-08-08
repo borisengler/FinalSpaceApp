@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.finalfinalspace.data.db.models.CharacterWithQuotesInfo
 import com.example.finalfinalspace.data.db.models.QuotesInfo
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +25,6 @@ interface QuotesDAO {
         ORDER BY name
         """
     )
+    @Transaction
     fun getCharactersWithQuotes(): Flow<List<CharacterWithQuotesInfo>>
 }

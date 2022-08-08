@@ -8,7 +8,6 @@
     tools:context=".ui.quotes.QuotesFragment"
     >
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/quotes_refresh"
         android:layout_width="match_parent"
