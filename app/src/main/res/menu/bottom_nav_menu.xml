@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/episodesFragment"
-        android:title="Episodes"
-        android:icon="@drawable/ic_baseline_list_24"/>
+        android:title="@string/episodes"
+        android:icon="@drawable/ic_list"/>
 
     <item android:id="@+id/quotesFragment"
-        android:title="Quotes"
-        android:icon="@drawable/ic_baseline_format_quote_24"/>
+        android:title="@string/quotes"
+        android:icon="@drawable/ic_format_quote"/>
 
     <item android:id="@+id/settingsFragment"
-        android:title="Settings"
-        android:icon="@drawable/ic_baseline_settings_24"/>
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings"/>
 </menu>

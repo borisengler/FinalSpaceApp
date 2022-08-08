@@ -1,6 +1,5 @@
 package com.example.finalfinalspace.ui.settings
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.BuildConfig
@@ -14,6 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,17 +31,17 @@ class SettingsViewModel @Inject constructor(
     val autoSync get() = settingsStorage.getAutoSync()
 
     fun downloadData() {
-        Log.d("Downloading", "...")
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 charactersManager.downloadCharacters()
                 episodesManager.downloadEpisodes()
                 quotesManager.downloadQuotes()
             }.onFailure {
+                Timber.e(it.message)
                 _downloadStatus.emit(false)
-                Log.d("err", it.message.toString())
+            }.onSuccess {
+                _downloadStatus.emit(true)
             }
-            _downloadStatus.emit(true)
         }
     }
 
@@ -50,10 +50,6 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun getVersion(): String {
-        return BuildConfig.VERSION_CODE.toString() + " (" + BuildConfig.VERSION_NAME + ")"
-    }
-
-    companion object {
-        const val API_URL = "https://finalspaceapi.com/"
+        return BuildConfig.VERSION_NAME
     }
 }

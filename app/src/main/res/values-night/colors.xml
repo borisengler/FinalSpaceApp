@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
     <color name="colorPrimary">#616161</color>
     <color name="colorPrimaryVariant">#8e8e8e</color>
     <color name="colorPrimaryVariantDark">#373737</color>
@@ -9,9 +8,10 @@
 
     <color name="colorSecondary">#8e24aa</color>
     <color name="colorSecondaryVariant">#c158dc</color>
-    <color name="colorOnSecondary">#5c007a</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
 
     <color name="cardColor">#FFFFFFFF</color>
     <color name="textColor">#202020</color>
     <color name="textBGColor">#88EFEAEA</color>
+
 </resources>

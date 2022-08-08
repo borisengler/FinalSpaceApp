@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,23 +25,29 @@ class MainViewModel @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
+    init {
+        if (autoSync) {
+            downloadData()
+        }
+    }
+
     private val _downloadStatus = MutableSharedFlow<Boolean>()
     val downloadStatus = _downloadStatus.asSharedFlow()
 
-    val autoSync get() = settingsStorage.getAutoSync()
+    private val autoSync get() = settingsStorage.getAutoSync()
 
     fun downloadData() {
-        Log.d("Downloading", "...")
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 charactersManager.downloadCharacters()
                 episodesManager.downloadEpisodes()
                 quotesManager.downloadQuotes()
             }.onFailure {
+                Timber.e(it.message)
                 _downloadStatus.emit(false)
-                Log.d("err", it.message.toString())
+            }.onSuccess {
+                _downloadStatus.emit(true)
             }
-            _downloadStatus.emit(true)
         }
     }
 }

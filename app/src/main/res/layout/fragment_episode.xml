@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         >
 
-
         <TextView
             android:id="@+id/episodeName"
             android:layout_width="wrap_content"

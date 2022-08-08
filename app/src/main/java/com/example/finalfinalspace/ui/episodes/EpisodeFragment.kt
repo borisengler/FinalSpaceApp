@@ -21,13 +21,13 @@ class EpisodeFragment : Fragment() {
 
     private val episodesVM: EpisodesViewModel by viewModels()
 
-    lateinit var binding: FragmentEpisodeBinding
+    private var binding: FragmentEpisodeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentEpisodeBinding.inflate(inflater, container, false)
 
         val episodeId = arguments?.get("episodeId") as? Int
@@ -40,17 +40,18 @@ class EpisodeFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 episodesVM.episodeWithCharacters.collectLatest {
                     with(binding) {
-                        episodeName.text = it?.episode?.name
-                        episodeDate.text = getString(R.string.episodeAirDate, it?.episode?.airDate)
-                        episodeDirector.text = getString(R.string.episodeDirector, it?.episode?.director)
-                        episodeWriter.text = getString(R.string.episodeWriter, it?.episode?.writer)
-                        episodeCharacters.text = it?.characters?.joinToString { it.name }
-                        Glide.with(root).load(it?.episode?.imageUrl).into(episodeImage)
+                        this?.episodeName?.text = it?.episode?.name
+                        this?.episodeDate?.text = getString(R.string.episodeAirDate, it?.episode?.airDate)
+                        this?.episodeDirector?.text = getString(R.string.episodeDirector, it?.episode?.director)
+                        this?.episodeWriter?.text = getString(R.string.episodeWriter, it?.episode?.writer)
+                        this?.episodeCharacters?.text = it?.characters?.joinToString { it.name }
+                        this?.episodeImage?.let { it1 -> this.root.let {
+                            it2 -> Glide.with(it2).load(it?.episode?.imageUrl).into(it1) }
+                        }
                     }
                 }
             }
         }
-
-        return binding.root
+        return binding?.root
     }
 }

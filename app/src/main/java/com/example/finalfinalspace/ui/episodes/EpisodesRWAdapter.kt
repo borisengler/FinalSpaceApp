@@ -39,16 +39,19 @@ class EpisodesRWAdapter @Inject constructor() :
 
     inner class EpisodeViewHolder(
         private val binding: ItemEpisodeBinding,
-        listener: OnItemClickListener
+        private val listener: OnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private var id: Int? = null
+
         init {
-            itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+            binding.parent.setOnClickListener {
+                id?.let { listener.onItemClick(it) }
             }
         }
 
         fun bind(info: EpisodesInfo) {
+            id = info.episodeId
             binding.episodeName.text = info.name
             binding.episodeDate.text = info.airDate
             Glide.with(binding.root).load(info.imageUrl).into(binding.episodeImg)
