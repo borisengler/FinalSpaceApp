@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
+import com.example.finalfinalspace.di.qualifiers.MainDispatcher
 import com.example.finalfinalspace.domain.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,12 +16,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class QuotesViewModel @Inject constructor(
     private val quotesManager: QuotesManager,
+    @MainDispatcher val mainDispatcher: CoroutineDispatcher,
     @IoDispatcher val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _errorMessage = MutableSharedFlow<Unit>()
@@ -42,15 +45,17 @@ class QuotesViewModel @Inject constructor(
         }.flowOn(ioDispatcher)
 
     fun downloadData() {
-        viewModelScope.launch(ioDispatcher) {
+        viewModelScope.launch(mainDispatcher) {
             _downloading.emit(true)
-            runCatching {
-                quotesManager.downloadQuotes()
-            }.onFailure {
-                Timber.e(it.message)
-                _errorMessage.emit(Unit)
+            withContext(ioDispatcher) {
+                runCatching {
+                    quotesManager.downloadQuotes()
+                }.onFailure {
+                    Timber.e(it)
+                    _errorMessage.emit(Unit)
+                }
+                _downloading.emit(false)
             }
-            _downloading.emit(false)
         }
     }
 }

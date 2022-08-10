@@ -1,6 +1,7 @@
 package com.example.finalfinalspace.data.prefs
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import javax.inject.Inject
 
 class SettingsStorage @Inject constructor(private val sharedPref: SharedPreferences) {
@@ -14,6 +15,6 @@ class SettingsStorage @Inject constructor(private val sharedPref: SharedPreferen
     }
 
     fun setAutoSync(value: Boolean) {
-        sharedPref.edit().putBoolean(AUTO_SYNC, value).apply()
+        sharedPref.edit { putBoolean(AUTO_SYNC, value) }
     }
 }

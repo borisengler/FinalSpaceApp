@@ -86,8 +86,8 @@ class EpisodesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
         episodesRWAdapter.setOnClickListener(object : EpisodesRWAdapter.OnItemClickListener {
-            override fun onItemClick(id: Int) {
-                val bundle: Bundle = bundleOf("episodeId" to id)
+            override fun onItemClick(position: Int) {
+                val bundle: Bundle = bundleOf("episodeId" to position)
                 navController.navigate(R.id.action_episodesFragment_to_episodeFragment, bundle)
             }
         })

@@ -31,7 +31,6 @@ class EpisodeFragment : Fragment() {
         binding = FragmentEpisodeBinding.inflate(inflater, container, false)
 
         val episodeId = arguments?.get("episodeId") as? Int
-
         if (episodeId != null) {
             episodesVM.loadEpisodeWithCharacters(episodeId)
         }
