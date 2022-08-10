@@ -37,7 +37,7 @@ class SettingsViewModel @Inject constructor(
                 episodesManager.downloadEpisodes()
                 quotesManager.downloadQuotes()
             }.onFailure {
-                Timber.e(it.message)
+                Timber.e(it)
                 _downloadStatus.emit(false)
             }.onSuccess {
                 _downloadStatus.emit(true)
