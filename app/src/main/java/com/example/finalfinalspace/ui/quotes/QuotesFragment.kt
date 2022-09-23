@@ -44,8 +44,27 @@ class QuotesFragment : Fragment() {
             quotesVM.downloadData()
         }
 
+        binding?.searchQuotes?.addTextChangedListener(QuotesSearchListener(quotesVM))
+
         // Get quotes data
         viewLifecycleOwner.lifecycleScope.launch {
+            launch {
+                quotesVM.filter.collectLatest {
+                    quotesVM.getQuotesByCharacters(it)
+                    launch {
+                        quotesVM.quotes.collectLatest { data ->
+                            if (data.isNotEmpty()) {
+                                binding?.quotes?.visibility = View.VISIBLE
+                                binding?.empty?.visibility = View.GONE
+                                quotesRWAdapter.submitList(data)
+                            } else {
+                                binding?.quotes?.visibility = View.GONE
+                                binding?.empty?.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+            }
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     quotesVM.errorMessage.collectLatest {
@@ -57,24 +76,13 @@ class QuotesFragment : Fragment() {
                     }
                 }
                 launch {
-                    quotesVM.quotesByCharacters.collectLatest {
-                        if (it.isNotEmpty()) {
-                            binding?.quotes?.visibility = View.VISIBLE
-                            binding?.empty?.visibility = View.GONE
-                            quotesRWAdapter.submitList(it)
-                        } else {
-                            binding?.quotes?.visibility = View.GONE
-                            binding?.empty?.visibility = View.VISIBLE
-                        }
-                    }
-                }
-                launch {
                     quotesVM.downloading.collectLatest {
                         binding?.quotesRefresh?.isRefreshing = it
                     }
                 }
             }
         }
+
 
         return binding?.root
     }

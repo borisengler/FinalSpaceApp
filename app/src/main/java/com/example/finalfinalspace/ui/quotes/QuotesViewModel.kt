@@ -1,5 +1,7 @@
 package com.example.finalfinalspace.ui.quotes
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
@@ -13,6 +15,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -32,10 +35,20 @@ class QuotesViewModel @Inject constructor(
     private val _downloading = MutableStateFlow(false)
     val downloading = _downloading.asStateFlow()
 
-    val quotes = quotesManager.quotes
+    val filter = MutableSharedFlow<String>()
 
-    val quotesByCharacters: Flow<List<QuoteOrCharacter>> =
-        quotesManager.quotesByCharacters.map { listOfCharactersWithQuotes ->
+    var quotes: Flow<List<QuoteOrCharacter>> = flowOf(emptyList())
+
+    init {
+//        getQuotesByCharacters()
+        viewModelScope.launch(mainDispatcher) {
+            filter.emit("")
+        }
+    }
+
+
+    fun getQuotesByCharacters(filter: String = "") {
+        quotes = quotesManager.getQuotesByCharacters(filter).map { listOfCharactersWithQuotes ->
             val items = mutableListOf<QuoteOrCharacter>()
             listOfCharactersWithQuotes.forEach {
                 items += it.character
@@ -43,6 +56,7 @@ class QuotesViewModel @Inject constructor(
             }
             return@map items
         }.flowOn(ioDispatcher)
+    }
 
     fun downloadData() {
         viewModelScope.launch(mainDispatcher) {

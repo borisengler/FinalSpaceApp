@@ -22,6 +22,17 @@ interface QuotesDAO {
         """SELECT DISTINCT characters.*
         FROM characters JOIN quotes_db
         ON characters.name = quotes_db.by_who
+        WHERE quotes_db.by_who LIKE :filter OR quotes_db.quote LIKE :filter
+        ORDER BY name
+        """
+    )
+    @Transaction
+    fun getCharactersWithQuotes(filter: String): Flow<List<CharacterWithQuotesInfo>>
+
+    @Query(
+        """SELECT DISTINCT characters.*
+        FROM characters JOIN quotes_db
+        ON characters.name = quotes_db.by_who
         ORDER BY name
         """
     )

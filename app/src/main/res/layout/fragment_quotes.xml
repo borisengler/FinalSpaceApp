@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.quotes.QuotesFragment"
+    android:visibility="visible"
     >
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,14 +25,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/none"
                 android:layout_marginStart="@dimen/large"
-                android:layout_marginEnd="@dimen/large"
                 android:layout_marginTop="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
                 android:layout_marginBottom="@dimen/large"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_quotes"
                 tools:listitem="@layout/item_quote"
                 />
 
@@ -45,6 +46,22 @@
                 android:text="@string/no_data_available_sync_your_data_first"
                 android:textSize="@dimen/textLarge"
                 android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+
+
+            <EditText
+                android:id="@+id/search_quotes"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:text="Name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                app:layout_constraintBottom_toTopOf="@+id/quotes"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
