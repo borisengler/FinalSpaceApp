@@ -1,6 +1,5 @@
 package com.example.finalfinalspace.ui.quotes
 
-import com.example.finalfinalspace.data.db.models.CharacterWithQuotesInfo
 import com.example.finalfinalspace.data.db.models.CharactersInfo
 import com.example.finalfinalspace.data.db.models.QuotesInfo
 import com.example.finalfinalspace.domain.QuotesManager
@@ -39,10 +38,10 @@ class QuotesViewModelTest {
         private val QUOTES_BY_CHARACTER_FLOW = flowOf(
             mapOf(
                 CharactersInfo(1, "char", "url") to
-                listOf(
-                    QuotesInfo(1, "Quote", "char"),
-                    QuotesInfo(1, "Quote", "char")
-                )
+                    listOf(
+                        QuotesInfo(1, "Quote", "char"),
+                        QuotesInfo(1, "Quote", "char")
+                    )
             )
         )
         private val QUOTES_FLOW = flowOf(
@@ -58,7 +57,6 @@ class QuotesViewModelTest {
                 QuotesInfo(1, "Quote", "char")
             )
         )
-
     }
 
     @Before
@@ -66,7 +64,6 @@ class QuotesViewModelTest {
         MockKAnnotations.init(this, relaxUnitFun = true)
         coEvery { quotesManager.quotes } returns QUOTES_FLOW
         coEvery { quotesManager.getFilteredQuotes("") } returns QUOTES_BY_CHARACTER_FLOW
-
 
         quotesViewModel = QuotesViewModel(quotesManager, Dispatchers.Unconfined, testDispatcher)
     }
@@ -127,7 +124,7 @@ class QuotesViewModelTest {
     @Test
     fun testQuotesByCharacters() = runTest {
         launch {
-            quotesViewModel.getFilteredQuotes()
+            quotesViewModel.quotes
             Assert.assertEquals(QUOTES_BY_CHARACTER_RESULT.toList(), quotesViewModel.quotes.toList())
         }
     }

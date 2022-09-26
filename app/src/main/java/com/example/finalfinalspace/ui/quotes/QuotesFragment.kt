@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalfinalspace.R
 import com.example.finalfinalspace.databinding.FragmentQuotesBinding
@@ -35,8 +36,16 @@ class QuotesFragment : Fragment() {
 
         // set the recyclerview
         with(binding?.quotes) {
-            this?.adapter = quotesRWAdapter
-            this?.adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            (this?.layoutManager as GridLayoutManager).spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int =
+                    when (quotesRWAdapter.getItemViewType(position)) {
+                        QuotesRWAdapter.TYPE_CHARACTER -> resources.getInteger(R.integer.spanCount)
+                        QuotesRWAdapter.TYPE_QUOTE -> resources.getInteger(R.integer.spanCountHalf)
+                        else -> resources.getInteger(R.integer.spanCount)
+                    }
+            }
+            this.adapter = quotesRWAdapter
+            this.adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
 
         // set refresh swipe
@@ -48,24 +57,20 @@ class QuotesFragment : Fragment() {
 
         // Get quotes data
         viewLifecycleOwner.lifecycleScope.launch {
-            launch {
-                quotesVM.filter.collectLatest {
-                    quotesVM.getFilteredQuotes(it)
-                    launch {
-                        quotesVM.quotes.collectLatest { data ->
-                            if (data.isNotEmpty()) {
-                                binding?.quotes?.visibility = View.VISIBLE
-                                binding?.empty?.visibility = View.GONE
-                                quotesRWAdapter.submitList(data)
-                            } else {
-                                binding?.quotes?.visibility = View.GONE
-                                binding?.empty?.visibility = View.VISIBLE
-                            }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    quotesVM.quotes.collectLatest { data ->
+                        if (data.isNotEmpty()) {
+                            binding?.quotes?.visibility = View.VISIBLE
+                            binding?.empty?.visibility = View.GONE
+                            quotesRWAdapter.submitList(data)
+                            binding?.quotes?.smoothScrollToPosition(0)
+                        } else {
+                            binding?.quotes?.visibility = View.GONE
+                            binding?.empty?.visibility = View.VISIBLE
                         }
                     }
                 }
-            }
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     quotesVM.errorMessage.collectLatest {
                         Toast.makeText(
@@ -82,8 +87,6 @@ class QuotesFragment : Fragment() {
                 }
             }
         }
-
-
         return binding?.root
     }
 

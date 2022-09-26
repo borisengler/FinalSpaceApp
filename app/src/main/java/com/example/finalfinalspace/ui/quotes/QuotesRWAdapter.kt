@@ -3,6 +3,7 @@ package com.example.finalfinalspace.ui.quotes
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,8 +18,8 @@ class QuotesRWAdapter @Inject constructor() :
     ListAdapter<QuoteOrCharacter, RecyclerView.ViewHolder>(QuoteOrCharacterDiffCallback()) {
 
     companion object {
-        private const val TYPE_CHARACTER = 0
-        private const val TYPE_QUOTE = 1
+        internal const val TYPE_CHARACTER = 0
+        internal const val TYPE_QUOTE = 1
     }
 
     override fun onCreateViewHolder(
@@ -78,3 +79,5 @@ class QuotesRWAdapter @Inject constructor() :
         }
     }
 }
+
+

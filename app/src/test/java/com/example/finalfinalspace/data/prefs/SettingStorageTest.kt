@@ -64,5 +64,4 @@ class SettingStorageTest {
         verify(exactly = 1) { editor.putBoolean(AUTO_SYNC, false) }
         verify(exactly = 1) { editor.apply() }
     }
-
 }

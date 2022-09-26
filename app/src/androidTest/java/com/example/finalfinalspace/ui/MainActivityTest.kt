@@ -38,5 +38,4 @@ class MainActivityTest {
         onView(withId(R.id.episodes_recycler_view))
             .check(matches(isDisplayed()))
     }
-
 }
