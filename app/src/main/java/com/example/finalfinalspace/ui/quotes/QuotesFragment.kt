@@ -50,7 +50,7 @@ class QuotesFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             launch {
                 quotesVM.filter.collectLatest {
-                    quotesVM.getQuotesByCharacters(it)
+                    quotesVM.getFilteredQuotes(it)
                     launch {
                         quotesVM.quotes.collectLatest { data ->
                             if (data.isNotEmpty()) {

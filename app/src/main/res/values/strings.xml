@@ -20,4 +20,5 @@
     <string name="cancel">Cancel</string>
     <string name="dataDownloaded">Data downloaded</string>
     <string name="unableToSync">Unable to sync data</string>
+    <string name="search">Type to search</string>
 </resources>

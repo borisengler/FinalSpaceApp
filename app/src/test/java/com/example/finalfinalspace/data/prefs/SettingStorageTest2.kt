@@ -8,6 +8,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.times
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -18,6 +19,8 @@ class SettingStorageTest2 {
 
     @Before
     fun setUp() {
+        mockedSharedPref = mock()
+        editor = mock()
         whenever(mockedSharedPref.edit()).thenReturn(editor)
         whenever(editor.putBoolean(eq(SettingsStorage.AUTO_SYNC), anyBoolean())).thenReturn(editor)
 

@@ -37,13 +37,11 @@ class QuotesViewModelTest {
     companion object {
         private val EXCEPTION = Throwable("Failed to download data")
         private val QUOTES_BY_CHARACTER_FLOW = flowOf(
-            listOf(
-                CharacterWithQuotesInfo(
-                    CharactersInfo(1, "char", "url"),
-                    listOf(
-                        QuotesInfo(1, "Quote", "char"),
-                        QuotesInfo(1, "Quote", "char")
-                    )
+            mapOf(
+                CharactersInfo(1, "char", "url") to
+                listOf(
+                    QuotesInfo(1, "Quote", "char"),
+                    QuotesInfo(1, "Quote", "char")
                 )
             )
         )
@@ -67,7 +65,7 @@ class QuotesViewModelTest {
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
         coEvery { quotesManager.quotes } returns QUOTES_FLOW
-        coEvery { quotesManager.quotesByCharacters } returns QUOTES_BY_CHARACTER_FLOW
+        coEvery { quotesManager.getFilteredQuotes("") } returns QUOTES_BY_CHARACTER_FLOW
 
 
         quotesViewModel = QuotesViewModel(quotesManager, Dispatchers.Unconfined, testDispatcher)
@@ -129,7 +127,8 @@ class QuotesViewModelTest {
     @Test
     fun testQuotesByCharacters() = runTest {
         launch {
-            Assert.assertEquals(QUOTES_BY_CHARACTER_RESULT.toList(), quotesViewModel.quotesByCharacters.toList())
+            quotesViewModel.getFilteredQuotes()
+            Assert.assertEquals(QUOTES_BY_CHARACTER_RESULT.toList(), quotesViewModel.quotes.toList())
         }
     }
 }

@@ -30,7 +30,7 @@ class EpisodeFragment : Fragment() {
     ): View? {
         binding = FragmentEpisodeBinding.inflate(inflater, container, false)
 
-        val episodeId = arguments?.get("episodeId") as? Int
+        val episodeId = arguments?.getInt("episodeId")
         if (episodeId != null) {
             episodesVM.loadEpisodeWithCharacters(episodeId)
         }

@@ -41,7 +41,6 @@
                 android:layout_marginStart="@dimen/medium"
                 android:layout_marginTop="@dimen/medium"
                 android:layout_marginEnd="@dimen/medium"
-                android:layout_marginBottom="@dimen/medium"
                 android:addStatesFromChildren="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
