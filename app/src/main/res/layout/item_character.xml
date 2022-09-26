@@ -37,7 +37,6 @@
         android:layout_marginTop="@dimen/medium"
         android:layout_marginEnd="@dimen/medium"
         android:layout_marginBottom="@dimen/medium"
-        android:textColor="@color/colorOnPrimary"
         android:textSize="@dimen/headline"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"

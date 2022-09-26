@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quotes.QuotesFragment"
     android:visibility="visible"
+    tools:context=".ui.quotes.QuotesFragment"
     >
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -28,11 +28,11 @@
                 android:layout_marginTop="@dimen/large"
                 android:layout_marginEnd="@dimen/large"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="@integer/spanCount"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/search_quotes"
+                app:layout_constraintTop_toBottomOf="@+id/searchQuotesField"
+                app:spanCount="@integer/spanCount"
                 tools:listitem="@layout/item_quote"
                 />
 
@@ -48,26 +48,33 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchQuotesField"
                 />
 
 
-            <EditText
-                android:id="@+id/search_quotes"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchQuotesField"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/large"
-                android:layout_marginEnd="@dimen/large"
                 android:layout_marginTop="@dimen/large"
-                android:ems="10"
+                android:layout_marginEnd="@dimen/large"
                 android:hint="@string/search"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/quotes"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Name"
-                />
+                app:startIconDrawable="@drawable/ic_search"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_quotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

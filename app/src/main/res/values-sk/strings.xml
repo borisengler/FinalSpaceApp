@@ -15,10 +15,11 @@
     <string name="autoSync">Automatická synchronizácia</string>
     <string name="version">Verzia: %s</string>
     <string name="author">Autor: Boris Engler</string>
+    <string name="dialogTitle">Odísť?</string>
     <string name="dialogLeaveApp">Týmto opustíš aplikáciu. Pokračovať?</string>
     <string name="ok">OK</string>
     <string name="cancel">Zrušiť</string>
     <string name="dataDownloaded">Dáta sú stiahnuté</string>
     <string name="unableToSync">Nepodarilo sa stiahnuť dáta</string>
-    <string name="search">Ak chcete hľadať, zadajte</string>
+    <string name="search">Hľadať</string>
 </resources>
