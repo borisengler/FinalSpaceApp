@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
 import com.example.finalfinalspace.di.qualifiers.MainDispatcher
+import com.example.finalfinalspace.domain.CharactersManager
 import com.example.finalfinalspace.domain.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,6 +22,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,19 +42,17 @@ class QuotesViewModel @Inject constructor(
     var quotes: Flow<List<QuoteOrCharacter>> = flowOf(emptyList())
 
     init {
-//        getQuotesByCharacters()
         viewModelScope.launch(mainDispatcher) {
             filter.emit("")
         }
     }
 
-
-    fun getQuotesByCharacters(filter: String = "") {
-        quotes = quotesManager.getQuotesByCharacters(filter).map { listOfCharactersWithQuotes ->
+    fun getFilteredQuotes(filter: String = "") {
+        quotes = quotesManager.getFilteredQuotes(filter).map { characterWithQuotes ->
             val items = mutableListOf<QuoteOrCharacter>()
-            listOfCharactersWithQuotes.forEach {
-                items += it.character
-                items += it.quotes
+            characterWithQuotes.keys.sortedBy { it.name }.forEach {
+                items += it
+                items += characterWithQuotes[it]!!
             }
             return@map items
         }.flowOn(ioDispatcher)

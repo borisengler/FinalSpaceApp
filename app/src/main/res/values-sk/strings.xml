@@ -20,4 +20,5 @@
     <string name="cancel">Zrušiť</string>
     <string name="dataDownloaded">Dáta sú stiahnuté</string>
     <string name="unableToSync">Nepodarilo sa stiahnuť dáta</string>
+    <string name="search">Ak chcete hľadať, zadajte</string>
 </resources>
