@@ -52,6 +52,7 @@
                 android:layout_marginTop="@dimen/large"
                 android:layout_marginBottom="@dimen/large"
                 android:text="@string/autoSync"
+                android:textColor="@color/colorText"
                 android:textSize="@dimen/textLarge"
                 app:layout_constraintBottom_toTopOf="@+id/API"
                 app:layout_constraintEnd_toEndOf="parent"

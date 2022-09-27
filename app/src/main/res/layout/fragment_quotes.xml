@@ -63,15 +63,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+
                 app:startIconDrawable="@drawable/ic_search"
                 app:endIconMode="clear_text"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:startIconTint="?attr/colorOnBackground"
+                app:endIconTint="?attr/colorOnBackground"
+                android:textColorHint="?attr/colorOutline"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_quotes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnBackground"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>

@@ -87,8 +87,7 @@ class SettingsFragment : Fragment() {
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.ok)) { _, _ ->
                     goToApi()
-                }
-                .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                }.setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
                     dialog.cancel()
                 }.setIcon(R.drawable.ic_out_of_app)
             val alert = builder.create()

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#1C1C1C</color>
+    <color name="colorOnPrimary">#DDDDDD</color>
+    <color name="colorPrimaryContainer">#62BF25</color>
+    <color name="colorOnPrimaryContainer">#092100</color>
+    <color name="colorOnSecondary">#DDDDDD</color>
+    <color name="colorInversePrimary">#67E100</color>
+    <color name="colorOutline">#EEBCBCBC</color>
+    <color name="colorSurfaceVariant">#1F5300</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorBackground">#3E7018</color>
+    <color name="colorSecondaryContainer">#163D00</color>
+    <color name="colorText">#FFFFFF</color>
 
-<!--    <color name="colorPrimary">#616161</color>-->
-<!--    <color name="colorPrimaryVariant">#8e8e8e</color>-->
-<!--    <color name="colorPrimaryVariantDark">#373737</color>-->
-<!--    <color name="colorOnPrimary">#ffffff</color>-->
-
-<!--    <color name="colorSecondary">#8e24aa</color>-->
-<!--    <color name="colorSecondaryVariant">#c158dc</color>-->
-<!--    <color name="colorOnSecondary">#FFFFFF</color>-->
-
-<!--    <color name="cardColor">#FFFFFFFF</color>-->
-<!--    <color name="textColor">#202020</color>-->
-<!--    <color name="textBGColor">#88EFEAEA</color>-->
-
+    <color name="colorOnEpisodeText">#FFFFFF</color>
 </resources>

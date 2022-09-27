@@ -22,7 +22,6 @@
                 android:layout_marginBottom="@dimen/none"
                 android:gravity="start"
                 android:textSize="@dimen/textMedium"
-                android:background="@drawable/bg_rounded_corner"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
