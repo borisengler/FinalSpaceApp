@@ -3,35 +3,25 @@ package com.example.finalfinalspace.ui.settings
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.recreate
-import androidx.core.text.bold
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreference
 import com.example.finalfinalspace.R
-import com.example.finalfinalspace.data.prefs.SettingsStorage
 import com.example.finalfinalspace.data.prefs.enums.Themes
-import com.example.finalfinalspace.databinding.FragmentSettingsBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsFragment: PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
     private val settingsVM: SettingsViewModel by viewModels()
     private var autoSync: Preference? = null
@@ -41,7 +31,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
     private var downloadData: Preference? = null
 
     companion object {
-
         const val API_URL = "https://finalspaceapi.com/"
     }
 
@@ -120,9 +109,6 @@ class SettingsFragment: PreferenceFragmentCompat() {
             settingsVM.downloadData()
             true
         }
-
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

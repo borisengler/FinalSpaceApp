@@ -44,8 +44,10 @@ class EpisodeFragment : Fragment() {
                         this?.episodeDirector?.text = getString(R.string.episodeDirector, it?.episode?.director)
                         this?.episodeWriter?.text = getString(R.string.episodeWriter, it?.episode?.writer)
                         this?.episodeCharacters?.text = it?.characters?.joinToString { it.name }
-                        this?.episodeImage?.let { it1 -> this.root.let {
-                            it2 -> Glide.with(it2).load(it?.episode?.imageUrl).into(it1) }
+                        this?.episodeImage?.let { it1 ->
+                            this.root.let { it2 ->
+                                Glide.with(it2).load(it?.episode?.imageUrl).into(it1)
+                            }
                         }
                     }
                 }

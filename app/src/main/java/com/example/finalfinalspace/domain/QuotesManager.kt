@@ -2,7 +2,6 @@ package com.example.finalfinalspace.domain
 
 import com.example.finalfinalspace.data.api.FinalSpaceAPI
 import com.example.finalfinalspace.data.db.QuotesDAO
-import com.example.finalfinalspace.data.db.models.CharacterWithQuotesInfo
 import com.example.finalfinalspace.data.db.models.CharactersInfo
 import com.example.finalfinalspace.data.db.models.QuotesInfo
 import kotlinx.coroutines.flow.Flow
@@ -28,6 +27,5 @@ class QuotesManager @Inject constructor(
             "%"
         }
         return quotesDAO.getFilteredQuotes(sqlFilter).distinctUntilChanged()
-
     }
 }
