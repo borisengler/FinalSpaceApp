@@ -8,107 +8,109 @@
     tools:context=".ui.episodes.EpisodeFragment"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         >
 
-        <TextView
-            android:id="@+id/episodeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/large"
-            android:layout_marginEnd="@dimen/large"
-            android:gravity="center"
-            android:textColor="@color/colorOnPrimary"
-            android:textSize="@dimen/headline"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
-        <TextView
-            android:id="@+id/episodeDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/xlarge"
-            android:gravity="center"
-            android:textColor="@color/colorOnPrimary"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeName"
-            />
+            <TextView
+                android:id="@+id/episodeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
+                android:gravity="center"
+                android:textSize="@dimen/headline"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/episodeDirector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/large"
-            android:gravity="center"
-            android:textColor="@color/colorOnPrimary"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeDate"
-            />
+            <TextView
+                android:id="@+id/episodeDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/xlarge"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodeName"
+                />
 
-        <TextView
-            android:id="@+id/episodeWriter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/large"
-            tools:text="Writer: "
-            android:textColor="@color/colorOnPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeDirector"
-            />
+            <TextView
+                android:id="@+id/episodeDirector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/large"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodeDate"
+                />
 
-        <TextView
-            android:id="@+id/characters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/large"
-            tools:text="Characters: "
-            android:textColor="@color/colorOnPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
-            />
+            <TextView
+                android:id="@+id/episodeWriter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodeDirector"
+                tools:text="Writer: "
+                />
 
-        <ImageView
-            android:id="@+id/episodeImage"
-            android:layout_width="@dimen/none"
-            android:layout_height="@dimen/none"
-            android:layout_marginStart="@dimen/large"
-            android:layout_marginTop="@dimen/large"
-            android:layout_marginEnd="@dimen/large"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeCharacters"
-            tools:src="@tools:sample/avatars"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            />
+            <TextView
+                android:id="@+id/characters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
+                tools:text="Characters: "
+                />
 
-        <TextView
-            android:id="@+id/episodeCharacters"
-            android:layout_width="@dimen/none"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large"
-            android:layout_marginEnd="@dimen/large"
-            android:textColor="@color/colorOnPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/characters"
-            app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
-            />
+            <ImageView
+                android:id="@+id/episodeImage"
+                android:layout_width="@dimen/none"
+                android:layout_height="@dimen/none"
+                android:layout_marginStart="@dimen/large"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/episodeCharacters"
+                tools:src="@tools:sample/avatars"
+                tools:srcCompat="@tools:sample/backgrounds/scenic"
+                />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/episodeCharacters"
+                android:layout_width="@dimen/none"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:layout_marginEnd="@dimen/large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/characters"
+                app:layout_constraintTop_toBottomOf="@+id/episodeWriter"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.BuildConfig
 import com.example.finalfinalspace.data.prefs.SettingsStorage
+import com.example.finalfinalspace.data.prefs.enums.Themes
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
 import com.example.finalfinalspace.domain.CharactersManager
 import com.example.finalfinalspace.domain.EpisodesManager
@@ -29,8 +30,10 @@ class SettingsViewModel @Inject constructor(
     val downloadStatus = _downloadStatus.asSharedFlow()
 
     val autoSync get() = settingsStorage.getAutoSync()
+    val appTheme get() = settingsStorage.getAppTheme()
 
     fun downloadData() {
+        println("downloading...")
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 charactersManager.downloadCharacters()
@@ -47,6 +50,10 @@ class SettingsViewModel @Inject constructor(
 
     fun setAutoSync(value: Boolean) {
         settingsStorage.setAutoSync(value)
+    }
+
+    fun setAppTheme(value: Themes) {
+        settingsStorage.setAppTheme(value)
     }
 
     fun getVersion(): String {

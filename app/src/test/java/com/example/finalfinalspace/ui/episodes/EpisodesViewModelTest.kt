@@ -1,6 +1,5 @@
 package com.example.finalfinalspace.ui.episodes
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.finalfinalspace.data.db.models.CharactersInfo
 import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
 import com.example.finalfinalspace.data.db.models.EpisodesInfo
@@ -26,7 +25,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import timber.log.Timber
 
 @ExperimentalCoroutinesApi
@@ -75,7 +73,6 @@ class EpisodesViewModelTest {
         val job = launch {
             episodesViewModel.episodeWithCharacters.toList(episode)
         }
-
 
         episodesViewModel.loadEpisodeWithCharacters(1)
 

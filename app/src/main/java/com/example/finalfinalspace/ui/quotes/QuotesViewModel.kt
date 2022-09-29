@@ -1,28 +1,24 @@
 package com.example.finalfinalspace.ui.quotes
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
 import com.example.finalfinalspace.di.qualifiers.MainDispatcher
-import com.example.finalfinalspace.domain.CharactersManager
 import com.example.finalfinalspace.domain.QuotesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,23 +35,21 @@ class QuotesViewModel @Inject constructor(
 
     val filter = MutableSharedFlow<String>()
 
-    var quotes: Flow<List<QuoteOrCharacter>> = flowOf(emptyList())
+    val quotes = filter.flatMapLatest { filteredText ->
+        quotesManager.getFilteredQuotes(filteredText).map { characterWithQuotes ->
+            val items = mutableListOf<QuoteOrCharacter>()
+            characterWithQuotes.keys.sortedBy { it.name }.forEach {
+                items += it
+                characterWithQuotes[it]?.let { quotesList -> items += quotesList }
+            }
+            return@map items
+        }
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     init {
         viewModelScope.launch(mainDispatcher) {
             filter.emit("")
         }
-    }
-
-    fun getFilteredQuotes(filter: String = "") {
-        quotes = quotesManager.getFilteredQuotes(filter).map { characterWithQuotes ->
-            val items = mutableListOf<QuoteOrCharacter>()
-            characterWithQuotes.keys.sortedBy { it.name }.forEach {
-                items += it
-                items += characterWithQuotes[it]!!
-            }
-            return@map items
-        }.flowOn(ioDispatcher)
     }
 
     fun downloadData() {
