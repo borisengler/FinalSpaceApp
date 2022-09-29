@@ -13,8 +13,8 @@
     <string name="downloadData">Stiahnuť dáta</string>
     <string name="visitAPI">Otvoriť API</string>
     <string name="autoSync">Automatická synchronizácia</string>
-    <string name="version">Verzia: %s</string>
-    <string name="author">Autor: Boris Engler</string>
+    <string name="version">Verzia</string>
+    <string name="author">Autor</string>
     <string name="dialogTitle">Odísť?</string>
     <string name="dialogLeaveApp">Týmto opustíš aplikáciu. Pokračovať?</string>
     <string name="ok">OK</string>
@@ -22,4 +22,16 @@
     <string name="dataDownloaded">Dáta sú stiahnuté</string>
     <string name="unableToSync">Nepodarilo sa stiahnuť dáta</string>
     <string name="search">Hľadať</string>
+    <string name="visitAPISummary">Kliknutím navštívite API stránku</string>
+    <string name="downloadDataSummary">Kliknutím stiahnete dáta</string>
+    <string name="dataDownloadCategory">Sťahovanie dát</string>
+    <string name="appTheme">Téma aplikácie</string>
+    <string name="chooseAppTheme">Vyberte tému aplikácie</string>
+    <string name="autoSyncSummary">Dáta sa stiahnú po zapnutí aplikácie</string>
+    <string name="authorName">Boris Engler</string>
+    <string name="about">O aplikacií</string>
+    <string name="theme">Téma</string>
+    <string name="systemDefault">Predvolená systémom</string>
+    <string name="light">Svetlá</string>
+    <string name="dark">Tmavá</string>
 </resources>

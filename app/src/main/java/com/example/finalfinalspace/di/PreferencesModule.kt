@@ -16,6 +16,6 @@ object PreferencesModule {
     @Provides
     @Singleton
     fun providePreferences(application: Application): SharedPreferences {
-        return application.getSharedPreferences("FinalSpaceSharedPreferences", MODE_PRIVATE)
+        return application.getSharedPreferences("com.example.finalfinalspace_preferences", MODE_PRIVATE)
     }
 }

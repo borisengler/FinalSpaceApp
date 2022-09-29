@@ -7,6 +7,7 @@
     <color name="colorOnSecondary">#DDDDDD</color>
     <color name="colorInversePrimary">#67E100</color>
     <color name="colorOutline">#EEBCBCBC</color>
+    <color name="colorTextSecondary">#BCBCBC</color>
     <color name="colorSurfaceVariant">#1F5300</color>
     <color name="colorOnBackground">#FFFFFF</color>
     <color name="colorBackground">#3E7018</color>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="@string/dataDownloadCategory">
+        <SwitchPreference
+            android:title="@string/autoSync"
+            android:defaultValue="true"
+            android:key="autoSync"
+            android:icon="@drawable/ic_autosync"
+            android:summary="@string/autoSyncSummary"
+            />
+        <Preference
+            android:title="@string/downloadData"
+            android:summary="@string/downloadDataSummary"
+            android:key="downloadData"
+            android:icon="@drawable/ic_download"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/theme">
+        <ListPreference
+            android:icon="@drawable/ic_theme"
+            android:title="@string/appTheme"
+            android:dialogTitle="@string/chooseAppTheme"
+            android:summary="@string/chooseAppTheme"
+            android:key="appTheme"
+            android:defaultValue="1"
+            android:entries="@array/themesArray"
+            android:entryValues="@array/themesArrayValues"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/about">
+        <Preference
+            android:title="@string/author"
+            android:summary="@string/authorName"
+            android:icon="@drawable/ic_copyright">
+        </Preference>
+        <Preference
+            android:key="version"
+            android:title="@string/version"
+            android:icon="@drawable/ic_version">
+        </Preference>
+        <Preference
+            android:title="@string/visitAPI"
+            android:summary="@string/visitAPISummary"
+            android:icon="@drawable/ic_out_of_app"
+            android:key="visitApi">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

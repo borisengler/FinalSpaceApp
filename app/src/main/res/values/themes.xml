@@ -28,19 +28,28 @@
 
         <item name="titleTextColor">@color/colorText</item>
 
-        <item name="materialAlertDialogTheme">@style/FinalSpaceAlertDialog</item>
+        <item name="alertDialogTheme">@style/FinalSpaceDialog</item>
 
+        <item name="colorControlActivated">@color/colorPrimaryContainer</item>
+        <item name="colorSwitchThumbNormal">@color/colorOnPrimary</item>
+        <item name="android:colorForeground">@color/colorTextSecondary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="colorAccent">@color/colorOnPrimary</item>
     </style>
 
-    <style name="FinalSpaceAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+
+    <style name="FinalSpaceDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="buttonBarPositiveButtonStyle">@style/DialogTextButton</item>
         <item name="buttonBarNegativeButtonStyle">@style/DialogTextButton</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorText</item>
+        <item name="textColorAlertDialogListItem">@color/colorText</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="DialogTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
-    
-    
+
 
 </resources>

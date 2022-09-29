@@ -78,7 +78,9 @@ dependencies {
     def version_android_test_runner = "1.4.0"
     def version_android_test_rules = "1.4.0"
     def version_espresso = "3.4.0"
+    def version_preference = "1.2.0"
 
+    // Kotlin
     implementation "androidx.core:core-ktx:$version_ktx"
     implementation "com.google.android.material:material:$version_material"
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
@@ -98,6 +100,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$version_glide"
     implementation "com.jakewharton.timber:timber:$version_timber"
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation("androidx.preference:preference-ktx:$version_preference")
 
     kapt "androidx.room:room-compiler:$version_room"
     kapt "com.github.bumptech.glide:compiler:$version_glide"
