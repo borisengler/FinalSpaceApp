@@ -1,7 +1,6 @@
 package com.example.finalfinalspace.data.prefs
 
 import android.content.SharedPreferences
-import androidx.core.app.ActivityCompat.recreate
 import androidx.core.content.edit
 import com.example.finalfinalspace.data.prefs.enums.Themes
 import javax.inject.Inject
