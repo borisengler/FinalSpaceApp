@@ -49,5 +49,10 @@
             android:icon="@drawable/ic_out_of_app"
             android:key="visitApi">
         </Preference>
+        <Preference
+            android:title="Welcome message"
+            android:icon="@drawable/ic_wave"
+            android:key="welcomeMessage">
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

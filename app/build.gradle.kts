@@ -32,6 +32,19 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("free") {
+            dimension = "version"
+            applicationIdSuffix = ".free"
+        }
+        create("paid") {
+            dimension = "version"
+            applicationIdSuffix = ".paid"
+        }
+    }
+
     buildFeatures {
         dataBinding = true
         viewBinding = true
