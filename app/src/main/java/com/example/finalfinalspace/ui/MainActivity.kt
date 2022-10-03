@@ -19,6 +19,7 @@ import com.example.finalfinalspace.R
 import com.example.finalfinalspace.data.prefs.SettingsStorage
 import com.example.finalfinalspace.data.prefs.enums.Themes
 import com.example.finalfinalspace.databinding.ActivityMainBinding
+import com.example.finalfinalspace.services.PushNotificationService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -53,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding?.navigationbar?.setupWithNavController(navController)
+
+        println("token:" + PushNotificationService().getToken(applicationContext))
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

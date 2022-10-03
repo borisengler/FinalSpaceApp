@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.Flow
 interface QuotesDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertQuote(quote: QuotesInfo): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(articleList: List<QuotesInfo>): List<Long>
 
     @Query("SELECT * from quotes_db ORDER BY by_who, quote ASC")

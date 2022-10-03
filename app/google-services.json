@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "938341648121",
+    "project_id": "finalspaceapp",
+    "storage_bucket": "finalspaceapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938341648121:android:fbbcbae7e258bc85fa4428",
+        "android_client_info": {
+          "package_name": "com.example.finalfinalspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938341648121-bo49moh3nuoeueuqcng68kss8a8cprsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmdGAK5MFV0VmfHRlexr6ptCsiZ8N7zKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938341648121-bo49moh3nuoeueuqcng68kss8a8cprsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

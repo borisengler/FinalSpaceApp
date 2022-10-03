@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 apply(plugin = "org.jlleitschuh.gradle.ktlint")
@@ -71,6 +72,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.hilt)
     implementation(libs.preference)
+    implementation(libs.firebase)
 
     kapt(libs.room.compiler)
     kapt(libs.glide.compiler)
