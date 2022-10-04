@@ -1,12 +1,12 @@
 package com.example.finalfinalspace.data.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.finalfinalspace.data.db.models.CharacterWithQuotesInfo
-import com.example.finalfinalspace.data.db.models.CharactersInfo
 import com.example.finalfinalspace.data.db.models.QuotesInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -33,12 +33,12 @@ interface QuotesDAO {
     fun getCharactersWithQuotes(): Flow<List<CharacterWithQuotesInfo>>
 
     @Query(
-        """SELECT characters.*, quotes_db.* 
-            FROM quotes_db JOIN characters
-            ON quotes_db.by_who = characters.name
-            WHERE  quotes_db.by_who LIKE :filter OR quotes_db.quote LIKE :filter
+        """SELECT quotes_db.* 
+            FROM quotes_db
+            WHERE  (quotes_db.by_who LIKE :filter OR quotes_db.quote LIKE :filter)
+            ORDER BY quotes_db.by_who, quotes_db.quote
         """
     )
     @Transaction
-    fun getFilteredQuotes(filter: String): Flow<Map<CharactersInfo, List<QuotesInfo>>>
+    fun getFilteredQuotes(filter: String): PagingSource<Int, QuotesInfo>
 }

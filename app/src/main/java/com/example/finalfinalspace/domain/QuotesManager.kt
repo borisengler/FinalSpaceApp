@@ -1,17 +1,28 @@
 package com.example.finalfinalspace.domain
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.insertSeparators
 import com.example.finalfinalspace.data.api.FinalSpaceAPI
+import com.example.finalfinalspace.data.db.CharactersDAO
 import com.example.finalfinalspace.data.db.QuotesDAO
-import com.example.finalfinalspace.data.db.models.CharactersInfo
+import com.example.finalfinalspace.data.db.models.QuoteOrCharacter
 import com.example.finalfinalspace.data.db.models.QuotesInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class QuotesManager @Inject constructor(
     private val quotesDAO: QuotesDAO,
+    private val charactersDAO: CharactersDAO,
     private val finalSpaceAPI: FinalSpaceAPI
 ) {
+
+    companion object {
+        const val PAGE_SIZE = 30
+    }
 
     val quotes = quotesDAO.getAllQuotes().distinctUntilChanged()
 
@@ -24,12 +35,30 @@ class QuotesManager @Inject constructor(
         quotesDAO.insertQuote(quotesInfo)
     }
 
-    fun getFilteredQuotes(filter: String): Flow<Map<CharactersInfo, List<QuotesInfo>>> {
+    fun getFilteredQuotes(filter: String): Flow<PagingData<QuoteOrCharacter>> {
         val sqlFilter = if (filter.isNotEmpty()) {
             "%$filter%"
         } else {
             "%"
         }
-        return quotesDAO.getFilteredQuotes(sqlFilter).distinctUntilChanged()
+        return Pager(
+            config = PagingConfig(PAGE_SIZE),
+            pagingSourceFactory = { quotesDAO.getFilteredQuotes(sqlFilter) }
+        ).flow.map {
+            it.insertSeparators { quotesInfo1: QuotesInfo?, quotesInfo2: QuotesInfo? ->
+                return@insertSeparators if (quotesInfo1 == null) {
+                    if (quotesInfo2 == null) {
+                        return@insertSeparators null
+                    }
+                    charactersDAO.fetchCharacterByName(quotesInfo2.by)
+                } else if (quotesInfo2 == null) {
+                    null
+                } else if (quotesInfo1.by != quotesInfo2.by) {
+                    charactersDAO.fetchCharacterByName(quotesInfo2.by)
+                } else {
+                    null
+                }
+            }
+        }
     }
 }

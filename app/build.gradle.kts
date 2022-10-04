@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.moshi.converter)
     implementation(libs.coil)
     implementation(libs.room.runtime)
+    implementation(libs.room.paging)
     implementation(libs.okhttp)
     implementation(libs.retrofit)
     implementation(libs.room)
@@ -86,6 +87,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.preference)
     implementation(libs.firebase)
+    implementation(libs.paging)
 
     kapt(libs.room.compiler)
     kapt(libs.glide.compiler)
