@@ -29,59 +29,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var version: Preference? = null
     private var visitApi: Preference? = null
     private var downloadData: Preference? = null
+    private var welcomeMessage: Preference? = null
 
     companion object {
         const val API_URL = "https://finalspaceapi.com/"
     }
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): FrameLayout? {
-//        binding = FragmentSettingsBinding.inflate(inflater, container, false)
-//
-//        binding?.autoSync?.isChecked = settingsVM.autoSync
-//        binding?.author?.text = SpannableStringBuilder()
-//            .append(getString(R.string.author) + "\n")
-//            .bold { append(getString(R.string.version, settingsVM.getVersion())) }
-//
-
-//        binding?.syncAll?.setOnClickListener { syncData() }
-//        binding?.autoSync?.setOnClickListener { autoSync() }
-//        binding?.API?.setOnClickListener { openApiDialog() }
-//
-//        return binding?.root
-//    }
-//
-//    private fun syncData() {
-//        settingsVM.downloadData()
-//    }
-//
-//    private fun autoSync() {
-//        settingsVM.setAutoSync(binding?.autoSync?.isChecked ?: true)
-//    }
-//
-//    private fun openApiDialog() {
-//        val builder = context?.let { MaterialAlertDialogBuilder(it) }
-//        builder?.let {
-//            it.setTitle(R.string.dialogTitle)
-//                .setMessage(getString(R.string.dialogLeaveApp))
-//                .setCancelable(false)
-//                .setPositiveButton(getString(R.string.ok)) { _, _ ->
-//                    goToApi()
-//                }.setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
-//                    dialog.cancel()
-//                }.setIcon(R.drawable.ic_out_of_app)
-//            val alert = builder.create()
-//            alert.show()
-//        }
-//    }
-//
-//    private fun goToApi() {
-//        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(API_URL))
-//        startActivity(browserIntent)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +61,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             settingsVM.downloadData()
             true
         }
+
+        welcomeMessage = findPreference("welcomeMessage")
+        welcomeMessage?.summary = settingsVM.welcomeMessage
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

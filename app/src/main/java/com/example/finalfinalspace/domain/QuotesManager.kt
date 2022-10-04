@@ -20,6 +20,10 @@ class QuotesManager @Inject constructor(
         quotesDAO.insertAll(quotes)
     }
 
+    suspend fun addQuote(quotesInfo: QuotesInfo) {
+        quotesDAO.insertQuote(quotesInfo)
+    }
+
     fun getFilteredQuotes(filter: String): Flow<Map<CharactersInfo, List<QuotesInfo>>> {
         val sqlFilter = if (filter.isNotEmpty()) {
             "%$filter%"

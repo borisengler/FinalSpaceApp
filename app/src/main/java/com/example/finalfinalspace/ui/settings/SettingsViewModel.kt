@@ -6,6 +6,7 @@ import com.example.finalfinalspace.BuildConfig
 import com.example.finalfinalspace.data.prefs.SettingsStorage
 import com.example.finalfinalspace.data.prefs.enums.Themes
 import com.example.finalfinalspace.di.qualifiers.IoDispatcher
+import com.example.finalfinalspace.di.qualifiers.WelcomeMessage
 import com.example.finalfinalspace.domain.CharactersManager
 import com.example.finalfinalspace.domain.EpisodesManager
 import com.example.finalfinalspace.domain.QuotesManager
@@ -23,7 +24,8 @@ class SettingsViewModel @Inject constructor(
     private val charactersManager: CharactersManager,
     private val quotesManager: QuotesManager,
     private val settingsStorage: SettingsStorage,
-    @IoDispatcher val ioDispatcher: CoroutineDispatcher
+    @IoDispatcher val ioDispatcher: CoroutineDispatcher,
+    @WelcomeMessage val message: String
 ) : ViewModel() {
 
     private val _downloadStatus = MutableSharedFlow<Boolean>()
@@ -31,9 +33,9 @@ class SettingsViewModel @Inject constructor(
 
     val autoSync get() = settingsStorage.getAutoSync()
     val appTheme get() = settingsStorage.getAppTheme()
+    val welcomeMessage get() = message
 
     fun downloadData() {
-        println("downloading...")
         viewModelScope.launch(ioDispatcher) {
             runCatching {
                 charactersManager.downloadCharacters()

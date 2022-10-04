@@ -9,6 +9,7 @@ buildscript {
         classpath(libs.hilt.plugin)
         classpath(libs.gradle)
         classpath(libs.kotlin)
+        classpath(libs.google.services)
     }
 }
 

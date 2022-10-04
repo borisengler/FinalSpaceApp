@@ -5,7 +5,6 @@ import com.example.finalfinalspace.data.db.CharInEpiDAO
 import com.example.finalfinalspace.data.db.EpisodesDAO
 import com.example.finalfinalspace.data.db.models.CharInEpiInfo
 import com.example.finalfinalspace.data.db.models.EpisodeWithCharactersInfo
-import com.example.finalfinalspace.data.db.models.EpisodesInfo
 import com.example.finalfinalspace.extensions.toDatabase
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
